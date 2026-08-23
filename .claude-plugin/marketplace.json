@@ -43,11 +43,11 @@
     },
     {
       "name": "deep-review",
-      "description": "Independent Evaluator for AI coding agents. v2.1.0 routes Claude-hosted Codex reviewers through generic codex exec with explicit model/reasoning controls, and Codex-hosted reviewers through fresh native subagents with fail-closed report admission and mutation-safety checks.",
+      "description": "Independent Evaluator for AI coding agents. v2.6.0 adds Grok/xAI as an opt-in fifth cross-family reviewer — dispatched only behind an explicit flag, an external privacy preflight, and an OS containment owner, so no repository content leaves the machine by default — and splits design-document review from executable-plan readiness.",
       "source": {
         "source": "url",
         "url": "https://github.com/Sungmin-Cho/deep-review.git",
-        "sha": "a94b303ea632624a620ae77d424c60d1a1fee7a5"
+        "sha": "923e79caf533c159d139f23f5590c2ffb1caf1a6"
       }
     },
     {

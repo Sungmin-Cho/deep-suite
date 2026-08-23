@@ -35,7 +35,7 @@ After:   deep-work가 리서치 → 명세 → 계획 → TDD → 리시트 실�
 | [deep-work](https://github.com/Sungmin-Cho/deep-work) | 7.2.3 | Evidence-Driven Development Protocol |
 | [deep-wiki](https://github.com/Sungmin-Cho/deep-wiki) | 1.9.7 | Wiki-local auto-ingest with safe legacy migration |
 | [deep-evolve](https://github.com/Sungmin-Cho/deep-evolve) | 3.6.3 | Autonomous Experimentation Protocol |
-| [deep-review](https://github.com/Sungmin-Cho/deep-review) | 2.5.0 | Independent Evaluator for AI coding agents |
+| [deep-review](https://github.com/Sungmin-Cho/deep-review) | 2.6.0 | Independent Evaluator for AI coding agents |
 | [deep-docs](https://github.com/Sungmin-Cho/deep-docs) | 1.7.0 | Document gardening + authoring |
 | [deep-dashboard](https://github.com/Sungmin-Cho/deep-dashboard) | 1.5.1 | Cross-plugin harness diagnostics + suite telemetry |
 | [deep-memory](https://github.com/Sungmin-Cho/deep-memory) | 1.0.6 | Cross-project semantic memory |
