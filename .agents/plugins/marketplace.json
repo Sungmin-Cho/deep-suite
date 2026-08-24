@@ -54,7 +54,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/Sungmin-Cho/deep-review.git",
-        "sha": "923e79caf533c159d139f23f5590c2ffb1caf1a6"
+        "sha": "6ba51feda554e7c19aa4bf2301d5eeefa490391d"
       },
       "policy": {
         "installation": "AVAILABLE",
