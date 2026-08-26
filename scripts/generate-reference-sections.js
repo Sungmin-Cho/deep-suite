@@ -15,6 +15,7 @@
 //   plugin-table-en       → README.md
 //   plugin-table-ko       → README.ko.md
 //   plugin-table-agents   → AGENTS.md
+//   problem-plugin-table-* → README.md / README.ko.md / integrated guides
 //   data-flow-en          → guides/integrated-workflow-guide.md
 //   data-flow-ko          → guides/integrated-workflow-guide.ko.md
 //   source-pinning        → docs/source-pinning.md (whole file managed)
@@ -30,6 +31,7 @@ import {
   FetchError,
 } from './lib/fetch-plugin-files.js';
 import { startMarker, endMarker, replaceBlock, extractBlock } from './lib/markers.js';
+import { PLUGIN_DECISIONS } from './lib/plugin-decisions.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(__dirname, '..');
@@ -76,6 +78,30 @@ function renderDataFlow({ dataFlow }) {
   }
   lines.push('```');
   return lines.join('\n');
+}
+
+function renderProblemPluginTable({ plugins, locale }) {
+  const headers = locale === 'ko'
+    ? ['플러그인', '핵심 질문', '언제 쓰나']
+    : ['Plugin', 'Core question', 'When to use'];
+  const rows = plugins.map((plugin) => {
+    const decision = PLUGIN_DECISIONS[plugin.plugin]?.[locale];
+    if (!decision) {
+      throw new Error(`missing ${locale} problem-routing copy for ${plugin.plugin}`);
+    }
+    const [question, when] = decision.map((cell) => cell.replace(/\|/g, '\\|'));
+    return `| **${plugin.plugin}** | "${question}" | ${when} |`;
+  });
+  const marketplaceNames = new Set(plugins.map((plugin) => plugin.plugin));
+  const extras = Object.keys(PLUGIN_DECISIONS).filter((name) => !marketplaceNames.has(name));
+  if (extras.length > 0) {
+    throw new Error(`problem-routing copy has unknown plugin(s): ${extras.join(', ')}`);
+  }
+  return [
+    `| ${headers.join(' | ')} |`,
+    `|${headers.map(() => '---').join('|')}|`,
+    ...rows,
+  ].join('\n');
 }
 
 function renderSourcePinning({ plugins, versions }) {
@@ -179,6 +205,10 @@ const TARGETS = [
   { id: 'plugin-table-en', file: 'README.md', kind: 'plugin-table', locale: 'en', linkify: true },
   { id: 'plugin-table-ko', file: 'README.ko.md', kind: 'plugin-table', locale: 'ko', linkify: true },
   { id: 'plugin-table-agents', file: 'AGENTS.md', kind: 'plugin-table', locale: 'en', linkify: false },
+  { id: 'problem-plugin-table-readme-en', file: 'README.md', kind: 'problem-plugin-table', locale: 'en' },
+  { id: 'problem-plugin-table-readme-ko', file: 'README.ko.md', kind: 'problem-plugin-table', locale: 'ko' },
+  { id: 'problem-plugin-table-guide-en', file: 'guides/integrated-workflow-guide.md', kind: 'problem-plugin-table', locale: 'en' },
+  { id: 'problem-plugin-table-guide-ko', file: 'guides/integrated-workflow-guide.ko.md', kind: 'problem-plugin-table', locale: 'ko' },
   { id: 'data-flow-en', file: 'guides/integrated-workflow-guide.md', kind: 'data-flow' },
   { id: 'data-flow-ko', file: 'guides/integrated-workflow-guide.ko.md', kind: 'data-flow' },
   { id: 'source-pinning', file: 'docs/source-pinning.md', kind: 'source-pinning', wholeFile: true },
@@ -197,6 +227,8 @@ function renderForTarget(target, ctx) {
       });
     case 'data-flow':
       return renderDataFlow({ dataFlow: ctx.sidecar.data_flow ?? [] });
+    case 'problem-plugin-table':
+      return renderProblemPluginTable({ plugins: ctx.plugins, locale: target.locale });
     case 'source-pinning':
       return renderSourcePinning({ plugins: ctx.plugins, versions: ctx.versions });
     case 'capability-matrix':

@@ -4,7 +4,7 @@
     "name": "sungmin"
   },
   "metadata": {
-    "description": "Deep Suite — ten plugins for structured development, knowledge wiki, autonomous experimentation, independent code review, document gardening, harness diagnostics, cross-project memory, goal-driven execution, cross-plugin loop orchestration, and deterministic model routing across Claude Code and Codex."
+    "description": "Deep Suite — ten plugins for structured development, knowledge wiki, autonomous experimentation, independent code review, document gardening, harness diagnostics, cross-project memory, goal-driven execution, cross-plugin loop orchestration, and deterministic model routing across compatible AI agent tools, with native marketplace surfaces for Claude Code and Codex."
   },
   "plugins": [
     {

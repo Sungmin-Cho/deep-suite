@@ -11,11 +11,11 @@
 //   - The single source of truth for the *total* is marketplace.plugins.length.
 //     Targets tagged `expected: TOTAL` assert against it.
 //   - A *curated subset* (the integrated-workflow guide covers the 7 M3-adopter
-//     artifact-workflow plugins, not all 9) asserts an explicit literal instead,
+//     artifact-workflow plugins, not the whole suite) asserts an explicit literal instead,
 //     and additionally cross-checks the count against the number of plugins named
 //     in its "Reflects ..." preamble (self-consistency — catches the 6-vs-7 class).
-//   - A legitimate subset phrase on another line (README "remaining six") is
-//     allow-listed so it is never mistaken for a total.
+//   - The README starter table has 3 entries. Its "remaining N" phrase is
+//     checked dynamically as marketplace.plugins.length - 3.
 //
 // Scope: this checks the *number* only. Capability-list completeness (e.g. a
 // missing deep-loop phrase in the marketplace description) is a one-time copy
@@ -36,6 +36,7 @@ import { startMarker, endMarker } from './lib/markers.js';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(__dirname, '..');
 const TOTAL = Symbol('marketplace.plugins.length');
+const STARTER_REMAINDER = Symbol('marketplace.plugins.length - 3 starters');
 
 const WORD_TO_NUM = { six: 6, seven: 7, eight: 8, nine: 9, ten: 10 };
 const WORD_ALT = `${Object.keys(WORD_TO_NUM).join('|')}|\\d+`;
@@ -135,8 +136,15 @@ const TARGETS = [
       new RegExp(`install one plugin, not\\s+(${WORD_ALT})\\b`, 'i'),
       new RegExp(`\\(all\\s+(${WORD_ALT})\\)`, 'i'),
     ],
-    allow: [new RegExp(`remaining\\s+(${WORD_ALT})\\s+plugins`, 'i')],
-    note: 'total-count phrases → total; "remaining six" is a legitimate subset (allow-listed)',
+    note: 'total-count phrases → total',
+  },
+  {
+    id: 'README.md starter remainder',
+    file: 'README.md',
+    markerIds: ['plugin-table-en', 'problem-plugin-table-readme-en'],
+    expected: STARTER_REMAINDER,
+    probes: [new RegExp(`remaining\\s+(${WORD_ALT})\\s+plugins`, 'i')],
+    note: 'starter table has 3 plugins → remainder must equal total - 3',
   },
   {
     id: 'README.ko.md',
@@ -147,8 +155,15 @@ const TARGETS = [
       /(\d+)\s*개\s*다\s*말고/,
       /(\d+)\s*개\s*모두/,
     ],
-    allow: [/나머지\s*(\d+)\s*개/],
-    note: 'total-count phrases → total; "나머지 6개" is a legitimate subset (allow-listed) (KO)',
+    note: 'total-count phrases → total (KO)',
+  },
+  {
+    id: 'README.ko.md starter remainder',
+    file: 'README.ko.md',
+    markerIds: ['plugin-table-ko', 'problem-plugin-table-readme-ko'],
+    expected: STARTER_REMAINDER,
+    probes: [/나머지\s*(\d+)\s*개/],
+    note: 'starter table has 3 plugins → remainder must equal total - 3 (KO)',
   },
 ];
 
@@ -189,7 +204,11 @@ function main() {
 
   const issues = [];
   for (const target of TARGETS) {
-    const expected = target.expected === TOTAL ? total : target.expected;
+    const expected = target.expected === TOTAL
+      ? total
+      : target.expected === STARTER_REMAINDER
+        ? total - 3
+        : target.expected;
     const resolved = resolveText(target, overrideDir);
     if (!resolved) {
       console.error(`error: ${target.id} not found`);
