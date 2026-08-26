@@ -33,7 +33,7 @@ Built on the [Harness Engineering](https://martinfowler.com/articles/harness-eng
 | Plugin | Version | Description |
 |---|---|---|
 | [deep-work](https://github.com/Sungmin-Cho/deep-work) | 7.3.0 | Evidence-Driven Development Protocol |
-| [deep-wiki](https://github.com/Sungmin-Cho/deep-wiki) | 1.9.7 | Wiki-local auto-ingest with safe legacy migration |
+| [deep-wiki](https://github.com/Sungmin-Cho/deep-wiki) | 1.10.0 | Oversized transaction isolation with sealed quarantine recovery |
 | [deep-evolve](https://github.com/Sungmin-Cho/deep-evolve) | 3.6.3 | Autonomous Experimentation Protocol |
 | [deep-review](https://github.com/Sungmin-Cho/deep-review) | 2.7.0 | Independent Evaluator for AI coding agents |
 | [deep-docs](https://github.com/Sungmin-Cho/deep-docs) | 1.7.0 | Document gardening + authoring |
@@ -287,6 +287,7 @@ Raw Sources  →  Wiki (markdown pages)  →  Schema (management rules)
 - **Commit deadline scaling (v1.9.0)** — unchanged catalog files are sealed by hash instead of full bytes, dropping per-commit journal/staging cost from O(catalog) to O(diff) so large vaults (~1,400 pages) commit within the deadline budget instead of splitting into repeated `transaction recover`; drift is handled by a crash-safe cancel (journal-first atomic activation, bounded debris sweep, platform-aware resume hints)
 - **Completed scan-window reclamation (v1.9.4)** — `wiki-lint --fix` safely retires completed ensure journals when sealed marker and reservation evidence proves recovery is no longer needed, while ambiguous or malformed transaction state remains fail closed
 - **Lock contention observability (v1.9.5)** — `lock acquire --json` emits one stable exit-3 JSON envelope with a token-free canonical holder, degrades ambiguous owner evidence to `holder: null`, and normalizes active release-transition contention without changing recovery or lock ownership semantics
+- **Oversized transaction isolation (v1.10.0)** — an oversized leftover transaction directory is classified `TRANSACTION_OVERSIZED` and stepped over by lock-free readers and lock-held writers instead of wedging every route on a permanent `DEADLINE_EXCEEDED`; isolatable trees are relocated into sealed `.wiki-meta/.quarantine/` bundles that are never auto-deleted, and `transaction recover … --json` self-locks when no lock token is supplied so the rollback-quarantine `follow_up` is directly executable
 
 [Full documentation →](https://github.com/Sungmin-Cho/deep-wiki)
 
