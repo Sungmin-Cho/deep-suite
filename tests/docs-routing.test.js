@@ -56,6 +56,22 @@ test('README positioning is AI-agent neutral while distinguishing native and por
   assert.match(ko, /이식 가능한 skill/i);
 });
 
+test('integrated guides keep review dispatch capability-based and host-neutral', () => {
+  const en = read('guides/integrated-workflow-guide.md');
+  const ko = read('guides/integrated-workflow-guide.ko.md');
+
+  assert.match(en, /capability-selected independent reviewer/i);
+  assert.match(en, /adapter-specific dispatch/i);
+  assert.match(ko, /capability[^\n]*독립 reviewer/i);
+  assert.match(ko, /adapter별 dispatch/i);
+  assert.doesNotMatch(en, /independent Claude reviewer|Claude CLI reviewer bridge/i);
+  assert.doesNotMatch(ko, /독립된 Claude reviewer|Claude CLI reviewer bridge/i);
+  for (const plugin of ['deep-goal', 'deep-loop', 'deep-model-router']) {
+    assert.match(en.split('\n')[4], new RegExp(plugin), `EN guide preamble must account for ${plugin}`);
+    assert.match(ko.split('\n')[4], new RegExp(plugin), `KO guide preamble must account for ${plugin}`);
+  }
+});
+
 test('README whole-suite install blocks contain every marketplace plugin exactly once', () => {
   for (const file of ['README.md', 'README.ko.md']) {
     const installed = wholeSuiteInstallNames(read(file));
@@ -81,7 +97,9 @@ test('deep-loop walkthrough uses real lifecycle entry points and documents durab
   const walkthrough = read('examples/deep-loop-lifecycle/README.md');
   const tree = read('examples/deep-loop-lifecycle/expected-run-tree.txt');
 
-  assert.match(index, /deep-loop-lifecycle/);
+  const indexLink = index.match(/\[[^\]]*deep-loop[^\]]*\]\((\.\/deep-loop-lifecycle\/)\)/i);
+  assert.ok(indexLink, 'examples index must contain a relative link to the walkthrough');
+  assert.equal(existsSync(resolve(repoRoot, 'examples', indexLink[1])), true, 'walkthrough link target must exist');
   for (const command of [
     '/deep-loop "', '$deep-loop:deep-loop "',
     '/deep-loop-continue', '$deep-loop:deep-loop-continue',
@@ -102,7 +120,17 @@ test('deep-loop walkthrough uses real lifecycle entry points and documents durab
     assert.ok(walkthrough.includes(skillPath), `walkthrough missing ${skillPath}`);
   }
   assert.match(walkthrough, /\.deep-loop\/runs\/<run-id>\//);
+  assert.match(walkthrough, /FINISH_PROOF_UNMET/);
+  assert.match(walkthrough, /stopped[^\n]*explicit human confirmation/i);
+  assert.match(walkthrough, /skill[^\n]*write[^\n]*final-report\.md/i);
+  assert.match(walkthrough, /loop\.json[^\n]*\.loop\.hash[^\n]*event-log\.jsonl[^\n]*kernel/i);
+  assert.doesNotMatch(walkthrough, /completed or stopped as the evidence requires/i);
   for (const artifact of ['loop.json', '.loop.hash', 'event-log.jsonl', 'episodes/', 'handoffs/', 'final-report.md']) {
     assert.ok(tree.includes(artifact), `expected-run-tree.txt missing ${artifact}`);
   }
+
+  const exampleText = `${walkthrough}\n${tree}`;
+  assert.doesNotMatch(exampleText, /(?:\/Users\/|\/home\/|[A-Za-z]:\\\\Users\\\\)/, 'example must not contain machine-specific user paths');
+  assert.doesNotMatch(exampleText, /(?:api[_-]?key|password|secret|token)\s*[:=]\s*\S+/i, 'example must not contain credential-like assignments');
+  assert.doesNotMatch(exampleText, /\b(?:sk-|ghp_|AKIA)[A-Za-z0-9_-]{8,}\b/, 'example must not contain recognizable secret prefixes');
 });

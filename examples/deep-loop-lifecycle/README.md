@@ -7,7 +7,7 @@ This walkthrough shows the real deep-loop lifecycle without pretending that a lo
 - Run from the project root where durable state should live.
 - Make the deep-loop plugin or its `skills/` directory available to the active agent host.
 - Use a genuinely loop-shaped goal: multiple workstreams, independent maker/checker work, or work expected to cross session boundaries.
-- Never edit `.deep-loop/` state files manually. Skills request every mutation through the deep-loop kernel.
+- Never edit `loop.json`, `.loop.hash`, or `event-log.jsonl` manually; every durable state/event mutation goes through the deep-loop kernel. The Finish skill may write `final-report.md` at the kernel-resolved run path before asking the kernel to finalize the run.
 
 Example goal used below:
 
@@ -48,7 +48,7 @@ Resume validates the durable boundary and ownership fence before acquiring the r
 
 ## 4. Finish
 
-When all required episodes and workstreams are settled and the kernel routes to finishing, invoke Finish. It validates proof-gated terminal state, writes `final-report.md`, and transitions the run to `completed` or `stopped` as the evidence requires.
+When all required episodes and workstreams are settled and the kernel routes to finishing, invoke Finish. The skill writes `final-report.md`, then the kernel transitions the run to `completed` only when every completion proof passes. `FINISH_PROOF_UNMET` reports the missing evidence and returns control to the human; it does not select another terminal state. `stopped` is a proof-bypass that requires explicit human confirmation and the kernel's `--confirm` gate, and an autonomous or headless tick never chooses it.
 
 The companion [`expected-run-tree.txt`](./expected-run-tree.txt) shows the stable top-level artifacts to expect. A real run may add checkpoints, transactions, observations, recovery capsules, and terminal-launch metadata depending on the active host and events.
 
