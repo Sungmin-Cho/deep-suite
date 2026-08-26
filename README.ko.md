@@ -33,7 +33,7 @@ After:   deep-work가 리서치 → 명세 → 계획 → TDD → 리시트 실�
 | 플러그인 | 버전 | 설명 |
 |---|---|---|
 | [deep-work](https://github.com/Sungmin-Cho/deep-work) | 7.3.0 | Evidence-Driven Development Protocol |
-| [deep-wiki](https://github.com/Sungmin-Cho/deep-wiki) | 1.9.7 | Wiki-local auto-ingest with safe legacy migration |
+| [deep-wiki](https://github.com/Sungmin-Cho/deep-wiki) | 1.10.0 | Oversized transaction isolation with sealed quarantine recovery |
 | [deep-evolve](https://github.com/Sungmin-Cho/deep-evolve) | 3.6.3 | Autonomous Experimentation Protocol |
 | [deep-review](https://github.com/Sungmin-Cho/deep-review) | 2.7.0 | Independent Evaluator for AI coding agents |
 | [deep-docs](https://github.com/Sungmin-Cho/deep-docs) | 1.7.0 | Document gardening + authoring |
@@ -291,6 +291,7 @@ Raw Sources  →  Wiki (markdown pages)  →  Schema (management rules)
 - **커밋 deadline 스케일링 (v1.9.0)** — 미변경 카탈로그 파일을 full-byte 대신 hash로 seal하여 per-commit journal/staging 비용을 O(catalog)→O(diff)로 낮춤; 대형 vault(~1,400 pages)가 반복 `transaction recover` 없이 deadline 예산 안에 커밋된다. drift는 crash-safe cancel(journal-first 원자 활성화, bounded debris sweep, 플랫폼별 resume 힌트)로 처리
 - **완료된 scan-window 회수 (v1.9.4)** — sealed marker와 reservation 증거로 복구가 더 이상 필요 없음을 입증한 경우 `wiki-lint --fix`가 완료된 ensure journal을 안전하게 정리하며, 모호하거나 잘못된 transaction 상태는 fail-closed로 유지
 - **Lock 경합 관측성 (v1.9.5)** — `lock acquire --json`이 token을 제외한 canonical holder를 담은 안정적인 exit-3 JSON envelope를 내보내고, 모호한 owner 증거는 `holder: null`로 낮추며, recovery나 lock 소유권 의미론을 바꾸지 않고 활성 release-transition 경합까지 정규화
+- **Oversized 트랜잭션 격리 (v1.10.0)** — oversized leftover transaction directory는 `TRANSACTION_OVERSIZED`로 분류되어 lock-free reader와 lock을 보유한 writer 모두 건너뛰므로, 모든 경로가 영구 `DEADLINE_EXCEEDED`로 막히지 않는다. isolatable 트리는 자동 삭제되지 않는 봉인된 `.wiki-meta/.quarantine/` 번들로 옮겨지며, `transaction recover … --json`은 lock token이 없으면 self-locking이라 rollback quarantine의 `follow_up`을 그대로 실행할 수 있다
 
 [전체 문서 →](https://github.com/Sungmin-Cho/deep-wiki)
 

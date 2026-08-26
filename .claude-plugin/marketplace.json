@@ -24,13 +24,13 @@
     },
     {
       "name": "deep-wiki",
-      "description": "Wiki-local auto-ingest with safe legacy migration",
+      "description": "Oversized transaction isolation with sealed quarantine recovery",
       "source": {
         "source": "url",
         "url": "https://github.com/Sungmin-Cho/deep-wiki.git",
-        "sha": "48ae802e2b19c7d2f1cf8730e8abed18e31c2952"
+        "sha": "525dfb8c2e113fd4b186f0232328d8a1e6f4f9ea"
       },
-      "sha": "48ae802e2b19c7d2f1cf8730e8abed18e31c2952"
+      "sha": "525dfb8c2e113fd4b186f0232328d8a1e6f4f9ea"
     },
     {
       "name": "deep-evolve",
