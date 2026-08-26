@@ -1,0 +1,13 @@
+.deep-loop/
+├── current                         # last-created hint; never routing authority
+└── runs/
+    └── <run-id>/
+        ├── loop.json               # canonical durable run state
+        ├── .loop.hash              # state integrity anchor
+        ├── event-log.jsonl         # append-only anchored events
+        ├── episodes/               # maker/checker episode records and evidence
+        ├── handoffs/               # session-boundary handoff artifacts
+        └── final-report.md          # written by the finish workflow
+
+Depending on runtime events, a real run can also contain checkpoints/,
+transactions/, observations/, recoveries/, and terminal/ artifacts.

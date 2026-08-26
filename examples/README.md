@@ -9,6 +9,7 @@ Drop-in example packs you can copy into your own project and tweak. Each subdire
 | [`hooks-suite-baseline/`](./hooks-suite-baseline/) | Minimal Claude Code hooks: SessionStart stale-state recovery, PreToolUse force-push guard, Stop metric flush. Drop-in safe for any project. | `.claude/settings.json` + 3 shell scripts |
 | [`hooks-strict-mode/`](./hooks-strict-mode/) | Defense-in-depth: 7 dangerous-command families blocked (force-push, hard-reset-to-remote, recursive-rm, SQL DROP/TRUNCATE, kubectl-delete/drain, npm-publish, curl-pipe-shell). Self-contained — do NOT also install baseline. | `.claude/settings.json` + 3 shell scripts |
 | [`handoff-phase5-to-evolve/`](./handoff-phase5-to-evolve/) | Filled-out handoff artifact template — the deep-work Phase 5 → deep-evolve canonical scenario. Copy + tweak placeholders. | `handoff-template.json` + `README.md` |
+| [`deep-loop-lifecycle/`](./deep-loop-lifecycle/) | Real host-neutral lifecycle walkthrough: start → continue → resume in a fresh session → finish, with native and portable invocation surfaces. | `README.md` + `expected-run-tree.txt` |
 
 ## How to install a hooks pack
 
@@ -57,6 +58,7 @@ The template is constructed to pass both the M3 envelope validator AND the hando
 | Baseline | M5.3 ✅ Active | `pre-tool-guard.sh` covers force-push; add more `if` rules to extend. |
 | Strict-mode | M5.3 ✅ Active | 7 families. Add families by extending `denylist-guard.sh` `case` block + adding a `PreToolUse[].if` rule in `.claude/settings.json`. |
 | Phase 5 → evolve handoff | M5.3 ✅ Template ready | Plugin-side emission is M5.7+ (deep-work + deep-evolve repos). |
+| Deep-loop lifecycle | ✅ Walkthrough ready | Real commands and durable-state boundaries; no in-memory mock. |
 
 ## Reference
 

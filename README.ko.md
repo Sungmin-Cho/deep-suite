@@ -2,11 +2,11 @@
 
 # Deep Suite
 
-[![License: MIT](https://img.shields.io/github/license/Sungmin-Cho/deep-suite)](LICENSE) ![Plugins](https://img.shields.io/badge/plugins-10-5b8def) ![Runtimes](https://img.shields.io/badge/runtimes-Claude%20Code%20%2B%20Codex-blue)
+[![License: MIT](https://img.shields.io/github/license/Sungmin-Cho/deep-suite)](LICENSE) ![Plugins](https://img.shields.io/badge/plugins-10-5b8def) ![범위](https://img.shields.io/badge/범위-AI%20agent%20tools-blue)
 
 **AI 코딩 에이전트는 강력하지만, 예측 가능한 방식으로 실패합니다** — 리서치를 건너뛰고, 과도하게 수정하고, 아키텍처에서 벗어나고, 자기 작업을 스스로 승인하고, 세션 사이에 맥락을 잃습니다.
 
-Deep Suite는 Claude Code와 Codex 위에서 AI 코딩을 **구조화·검증 가능·지속 가능**하게 만드는 **하네스 레이어**입니다. 코딩 전에 계획하게 하고, 작성한 코드를 독립 평가자가 리뷰하며, 지식을 잃지 않고 축적하고, 장기 작업을 여러 세션에 걸쳐 이어갑니다.
+Deep Suite는 AI 코딩을 **구조화·검증 가능·지속 가능**하게 만드는 **AI 에이전트용 하네스 레이어**입니다. 코딩 전에 계획하게 하고, 작성한 코드를 독립 평가자가 리뷰하며, 지식을 잃지 않고 축적하고, 장기 작업을 여러 세션에 걸쳐 이어갑니다. Claude Code와 Codex에는 네이티브 marketplace 표면을 제공하지만, 기반 skill 및 artifact 계약은 호환 가능한 범용 AI 에이전트 도구를 대상으로 합니다.
 
 ### 여기서 시작하세요 — 10개 다 말고, 하나만 설치
 
@@ -16,13 +16,15 @@ Deep Suite는 Claude Code와 Codex 위에서 AI 코딩을 **구조화·검증 �
 | **[deep-review](https://github.com/Sungmin-Cho/deep-review)** | 자가 승인 편향. 별도 평가자 에이전트가 AI가 작성한 코드를 리뷰 — 작성자가 자기 diff를 스스로 승인하지 못하게. |
 | **[deep-loop](https://github.com/Sungmin-Cho/deep-loop)** | 긴 작업에서 맥락을 잃는 문제. proposal-only 안전성으로 다중 세션 작업을 끊김 없이 진행. |
 
+다른 기능이 필요하다면 전체 [문제 → 플러그인 선택표](#통합-워크플로우)를 확인하세요.
+
 ```text
-Before:  Claude가 바로 수정  →  테스트 누락  →  자기 diff를 스스로 승인
+Before:  에이전트가 바로 수정  →  테스트 누락  →  자기 diff를 스스로 승인
 After:   deep-work가 리서치 → 명세 → 계획 → TDD → 리시트 실행,
          이후 deep-review가 독립적으로 승인
 ```
 
-나머지 6개 — **wiki, memory, docs, dashboard, evolve, goal** — 는 지식 축적, 크로스-프로젝트 메모리, 문서 가드닝, 하네스 텔레메트리, 자율 실험, 목표 컴파일이 필요해질 때 스위트를 확장합니다.
+나머지 7개 — **wiki, memory, docs, dashboard, evolve, goal, model router** — 는 지식 축적, 크로스-프로젝트 메모리, 문서 가드닝, 하네스 텔레메트리, 자율 실험, 목표 컴파일, 위험 기반 모델 라우팅이 필요해질 때 스위트를 확장합니다.
 
 [Harness Engineering](https://martinfowler.com/articles/harness-engineering.html) 프레임워크 (Böckeler/Fowler, 2026) 기반 — `Agent = Model + Harness` — Guides(feedforward) × Sensors(feedback) 축을 Computational/Inferential 제어와 교차 매핑한다.
 
@@ -47,7 +49,20 @@ After:   deep-work가 리서치 → 명세 → 계획 → TDD → 리시트 실�
 
 > 위 표는 marketplace manifest와 각 플러그인의 pinned `plugin.json.version` 으로부터 자동 생성됩니다. 직접 편집하지 말고 `.claude-plugin/marketplace.json` / `.agents/plugins/marketplace.json` 를 수정하세요. 갱신은 `node scripts/generate-reference-sections.js --write`.
 
-각 플러그인은 별도 Git 저장소: `github.com/Sungmin-Cho/deep-{name}`. marketplace **이름**은 기존 설치의 플러그인 키를 보존하기 위해 `claude-deep-suite` 를 유지하며, Codex 지원은 Codex marketplace mirror와 각 플러그인의 `.codex-plugin/plugin.json` 로 노출한다.
+각 플러그인은 별도 Git 저장소: `github.com/Sungmin-Cho/deep-{name}`. marketplace **이름**은 기존 설치의 플러그인 키를 보존하기 위해 `claude-deep-suite` 를 유지하지만, 이 역사적 키가 프로토콜을 특정 호스트로 제한하지는 않습니다.
+
+## 런타임 표면
+
+Deep Suite의 protocol과 artifact 계층은 호스트 중립적이며, 설치·hook·도구 권한·호출 문법은 각 호스트 adapter가 담당합니다.
+
+| 표면 | 상태 | 노출 방식 |
+|---|---|---|
+| Claude Code | 네이티브 marketplace | `.claude-plugin/marketplace.json` 및 slash-command 호환 skill |
+| Codex | 네이티브 marketplace | `.agents/plugins/marketplace.json` 및 각 플러그인의 `.codex-plugin/plugin.json` |
+| Grok | 플러그인별 adapter | 각 플러그인이 Grok runtime 계약을 명시한 범위에서 지원. 예: deep-loop의 attended macOS slash-command 실행 |
+| Copilot CLI, Gemini CLI, Agent SDK 및 유사 도구 | 이식 가능한 skill 표면 | 설치된 `skills/<skill>/SKILL.md` 진입점을 해당 호스트의 skill/tool adapter로 호출 |
+
+네이티브 marketplace 지원은 해당 호스트에 설치와 탐색이 통합되어 있다는 뜻입니다. 이식 가능한 skill 지원은 다른 호환 AI 에이전트가 같은 workflow 계약을 소비할 수 있다는 뜻이며, 모든 호스트에서 hook이나 sandbox 강도가 같다는 주장은 아닙니다.
 
 ---
 
@@ -84,6 +99,7 @@ After:   deep-work가 리서치 → 명세 → 계획 → TDD → 리시트 실�
 /plugin install deep-dashboard@claude-deep-suite
 /plugin install deep-evolve@claude-deep-suite
 /plugin install deep-goal@claude-deep-suite
+/plugin install deep-model-router@claude-deep-suite
 ```
 </details>
 
@@ -95,16 +111,16 @@ codex plugin marketplace add Sungmin-Cho/deep-suite
 
 Codex는 native marketplace mirror인 `.agents/plugins/marketplace.json` 를 읽고, 각 pinned plugin은 `.codex-plugin/plugin.json` 및 `skills/<skill>/SKILL.md` 로 Codex skill을 노출한다.
 
-이 README의 예시는 Claude Code slash command 기준이다. Codex에서는 대응하는 skill alias를 호출한다:
+예시는 짧게 읽히도록 Claude Code slash 형식을 자주 사용합니다. Codex는 대응 skill alias를 사용하고, Grok과 기타 호환 에이전트는 설치된 플러그인 또는 host adapter가 문서화한 호출 표면을 사용합니다.
 
-| 플러그인 | Claude Code | Codex |
-|---|---|---|
-| deep-work | `/deep-work "task"` | `$deep-work:deep-work "task"` |
-| deep-evolve | `/deep-evolve` | `$deep-evolve:deep-evolve` |
-| deep-review | `/deep-review-loop` | `$deep-review:deep-review-loop` |
-| deep-docs | `/deep-docs scan` | `$deep-docs:deep-docs scan` |
-| deep-wiki | `/wiki-ingest <source>` | `$deep-wiki:wiki-ingest <source>` |
-| deep-dashboard | `/deep-harness-dashboard` | `$deep-dashboard:deep-harness-dashboard` |
+| 플러그인 | Claude Code | Codex | 이식 가능한 skill 진입점 |
+|---|---|---|---|
+| deep-work | `/deep-work "task"` | `$deep-work:deep-work "task"` | `skills/deep-work/SKILL.md` |
+| deep-evolve | `/deep-evolve` | `$deep-evolve:deep-evolve` | `skills/deep-evolve/SKILL.md` |
+| deep-review | `/deep-review-loop` | `$deep-review:deep-review-loop` | `skills/deep-review-loop/SKILL.md` |
+| deep-docs | `/deep-docs scan` | `$deep-docs:deep-docs scan` | `skills/deep-docs/SKILL.md` |
+| deep-wiki | `/wiki-ingest <source>` | `$deep-wiki:wiki-ingest <source>` | `skills/wiki-ingest/SKILL.md` |
+| deep-dashboard | `/deep-harness-dashboard` | `$deep-dashboard:deep-harness-dashboard` | `skills/deep-harness-dashboard/SKILL.md` |
 
 ---
 
@@ -170,16 +186,24 @@ Deep Suite는 Harness Engineering 프레임워크를 구현합니다: 각 플러
 
 ### 통합 워크플로우
 
-각 플러그인은 독립적으로 동작하지만, 함께 사용할 때 진가가 드러난다:
+각 플러그인은 독립적으로 동작합니다. 먼저 문제에 따라 선택하고, 그 다음 런타임별 호출 방식을 적용합니다.
 
-| 플러그인 | 핵심 질문 | 사용 시점 |
+<!-- deep-suite:auto-generated:problem-plugin-table-readme-ko:start -->
+
+| 플러그인 | 핵심 질문 | 언제 쓰나 |
 |---|---|---|
-| **deep-work** | "어떻게 설계하고 구현하지?" | 모든 코딩 작업 — 기능, 버그, 리팩토링 |
-| **deep-evolve** | "자동으로 더 좋게 만들 수 있나?" | 성능 최적화, 테스트 개선 |
-| **deep-review** | "이 코드 정말 괜찮나?" | PR 전 독립 검증 |
-| **deep-docs** | "문서가 코드와 일치하나?" | 변경 후 문서 동기화 |
-| **deep-wiki** | "배운 것을 어떻게 남기지?" | 세션 간 지식 축적 |
-| **deep-dashboard** | "하네스가 잘 동작하나?" | 프로젝트 건강 진단 |
+| **deep-work** | "이걸 어떻게 설계하고 구현하지?" | 근거 기반 개발 흐름이 필요한 기능, 버그 수정, 리팩토링 |
+| **deep-wiki** | "이 에이전트가 배운 것을 어떻게 남기지?" | 세션과 작업자를 넘어 보존해야 하는 프로젝트 지식 |
+| **deep-evolve** | "에이전트가 이것을 측정 가능하게 개선할 수 있나?" | 고정된 단일 적합도 지표를 대상으로 한 제한된 자율 실험 |
+| **deep-review** | "이 작업이 실제로 괜찮은가?" | 수락 전 코드, 설계, 계획, 증거에 대한 독립 리뷰 |
+| **deep-docs** | "지침과 문서가 실제 상태와 맞는가?" | 에이전트용 프로젝트 문서의 스캔, 가드닝, 작성 |
+| **deep-dashboard** | "에이전트 하네스가 잘 동작하는가?" | 하네스 준비도 진단, 스위트 텔레메트리, 효과 추세 |
+| **deep-memory** | "에이전트가 프로젝트 간 재사용할 것은 무엇인가?" | 비식별화된 재사용 메모리 카드와 작업별 회상 |
+| **deep-goal** | "이 요청을 지속 가능한 목표로 어떻게 바꾸지?" | 장기 요청을 네이티브 goal 조건으로 컴파일 |
+| **deep-loop** | "긴 작업을 여러 세션에 걸쳐 어떻게 이어가지?" | 증거 기반 경계를 갖춘 지속 가능한 다중 세션 오케스트레이션 |
+| **deep-model-router** | "어떤 모델과 리뷰 깊이가 이 작업에 맞는가?" | 위임 전 위험 기반 모델, 추론 강도, 리뷰 라우팅 |
+
+<!-- deep-suite:auto-generated:problem-plugin-table-readme-ko:end -->
 
 **복잡도별 예시:**
 

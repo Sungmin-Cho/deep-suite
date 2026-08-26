@@ -6,7 +6,8 @@ import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
-import { readFileSync } from 'node:fs';
+import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(__dirname, '..');
@@ -140,8 +141,8 @@ test('check-memory-hierarchy.js exits 0 against committed plugin docs', () => {
 test('check-plugin-count.js exits 0 on clean repo (subsets self-consistent)', () => {
   const res = run('check-plugin-count.js');
   assert.equal(res.status, 0, res.stderr);
-  // The clean run tolerates the integrated-workflow curated subset (7) and the
-  // README "remaining six" subset without flagging them.
+  // The clean run validates the integrated-workflow curated subset (7) and the
+  // README starter remainder (marketplace total - 3).
   assert.match(res.stdout, /subsets self-consistent/);
 });
 
@@ -164,6 +165,21 @@ test('check-plugin-count.js exits 1 when marketplace description says "eight"', 
   assert.equal(res.status, 1, `expected drift; stderr: ${res.stderr}`);
   assert.match(res.stderr, /marketplace metadata\.description/);
   assert.match(res.stderr, /count "eight" != expected 10/);
+});
+
+test('check-plugin-count.js exits 1 when the README starter remainder is stale', () => {
+  const overrideDir = mkdtempSync(resolve(tmpdir(), 'deep-suite-plugin-count-'));
+  try {
+    const readme = readFileSync(resolve(repoRoot, 'README.md'), 'utf8')
+      .replace('remaining seven plugins', 'remaining six plugins');
+    writeFileSync(resolve(overrideDir, 'README.md'), readme);
+    const res = run('check-plugin-count.js', [], { M2_TEST_PLUGIN_COUNT_DIR: overrideDir });
+    assert.equal(res.status, 1, `expected drift; stderr: ${res.stderr}`);
+    assert.match(res.stderr, /README\.md starter remainder/);
+    assert.match(res.stderr, /count "six" != expected 7/);
+  } finally {
+    rmSync(overrideDir, { recursive: true, force: true });
+  }
 });
 
 // --- check-fixture-provenance.js ---
