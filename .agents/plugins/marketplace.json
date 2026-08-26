@@ -50,11 +50,11 @@
     },
     {
       "name": "deep-review",
-      "description": "Independent Evaluator for AI coding agents. v2.6.0 adds Grok/xAI as an opt-in fifth cross-family reviewer — dispatched only behind an explicit flag, an external privacy preflight, and an OS containment owner, so no repository content leaves the machine by default — and splits design-document review from executable-plan readiness.",
+      "description": "Independent Evaluator for AI coding agents. v2.8.0 keeps text-extension files that git classified as binary as first-class review-target rows and accounts for every other binary omission, so a raw NUL byte can no longer silently drop a file from the payload.",
       "source": {
         "source": "url",
         "url": "https://github.com/Sungmin-Cho/deep-review.git",
-        "sha": "6ba51feda554e7c19aa4bf2301d5eeefa490391d"
+        "sha": "98d3e91b2750036d1cda280c5623021d40c511a6"
       },
       "policy": {
         "installation": "AVAILABLE",
