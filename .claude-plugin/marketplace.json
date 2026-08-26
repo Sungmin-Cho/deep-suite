@@ -24,13 +24,13 @@
     },
     {
       "name": "deep-wiki",
-      "description": "Oversized transaction isolation with sealed quarantine recovery",
+      "description": "Exact worker contracts with bounded timeout fallback and journaled wiki mutation",
       "source": {
         "source": "url",
         "url": "https://github.com/Sungmin-Cho/deep-wiki.git",
-        "sha": "525dfb8c2e113fd4b186f0232328d8a1e6f4f9ea"
+        "sha": "d5babf0203c23bde7ad2a30046a82e26e0d80ec3"
       },
-      "sha": "525dfb8c2e113fd4b186f0232328d8a1e6f4f9ea"
+      "sha": "d5babf0203c23bde7ad2a30046a82e26e0d80ec3"
     },
     {
       "name": "deep-evolve",

@@ -33,7 +33,7 @@ Built on the [Harness Engineering](https://martinfowler.com/articles/harness-eng
 | Plugin | Version | Description |
 |---|---|---|
 | [deep-work](https://github.com/Sungmin-Cho/deep-work) | 7.3.0 | Evidence-Driven Development Protocol |
-| [deep-wiki](https://github.com/Sungmin-Cho/deep-wiki) | 1.10.0 | Oversized transaction isolation with sealed quarantine recovery |
+| [deep-wiki](https://github.com/Sungmin-Cho/deep-wiki) | 1.10.1 | Exact worker contracts with bounded timeout fallback and journaled wiki mutation |
 | [deep-evolve](https://github.com/Sungmin-Cho/deep-evolve) | 3.6.3 | Autonomous Experimentation Protocol |
 | [deep-review](https://github.com/Sungmin-Cho/deep-review) | 2.7.0 | Independent Evaluator for AI coding agents |
 | [deep-docs](https://github.com/Sungmin-Cho/deep-docs) | 1.7.0 | Document gardening + authoring |
