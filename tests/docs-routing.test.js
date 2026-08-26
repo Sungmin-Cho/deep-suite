@@ -130,7 +130,9 @@ test('deep-loop walkthrough uses real lifecycle entry points and documents durab
   }
 
   const exampleText = `${walkthrough}\n${tree}`;
-  assert.doesNotMatch(exampleText, /(?:\/Users\/|\/home\/|[A-Za-z]:\\\\Users\\\\)/, 'example must not contain machine-specific user paths');
+  const machinePathPattern = /(?:\/Users\/|\/home\/|[A-Za-z]:[\\/]Users[\\/])/;
+  assert.match(String.raw`C:\Users\alice\project`, machinePathPattern, 'machine-path sensor must recognize a normal Windows user path');
+  assert.doesNotMatch(exampleText, machinePathPattern, 'example must not contain machine-specific user paths');
   assert.doesNotMatch(exampleText, /(?:api[_-]?key|password|secret|token)\s*[:=]\s*\S+/i, 'example must not contain credential-like assignments');
   assert.doesNotMatch(exampleText, /\b(?:sk-|ghp_|AKIA)[A-Za-z0-9_-]{8,}\b/, 'example must not contain recognizable secret prefixes');
 });
