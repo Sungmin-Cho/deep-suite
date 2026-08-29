@@ -43,11 +43,11 @@
     },
     {
       "name": "deep-review",
-      "description": "Independent Evaluator for AI coding agents. v2.8.0 keeps text-extension files that git classified as binary as first-class review-target rows and accounts for every other binary omission, so a raw NUL byte can no longer silently drop a file from the payload.",
+      "description": "Independent Evaluator for AI coding agents. v2.8.1 unifies GROK_AUTHORIZED_MODEL so the router gate and the bridge argv assertion cannot disagree.",
       "source": {
         "source": "url",
         "url": "https://github.com/Sungmin-Cho/deep-review.git",
-        "sha": "98d3e91b2750036d1cda280c5623021d40c511a6"
+        "sha": "7fe489522608a397e5b119266eea89af6a54caff"
       }
     },
     {
