@@ -124,7 +124,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/Sungmin-Cho/deep-loop.git",
-        "sha": "b388f400c1b5dc9098cfca9bc7e8abb099719cfb"
+        "sha": "2af3b0aaf5d4eb6217948160015461975e236a57"
       },
       "policy": {
         "installation": "AVAILABLE",
