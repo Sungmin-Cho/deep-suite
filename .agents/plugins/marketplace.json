@@ -68,7 +68,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/Sungmin-Cho/deep-docs.git",
-        "sha": "bc4cd41483e8c8206eca3634bb67b4216f4a0f73"
+        "sha": "9fb620acc211d4c92e5b5665e4ffed7148653d92"
       },
       "policy": {
         "installation": "AVAILABLE",
@@ -82,7 +82,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/Sungmin-Cho/deep-dashboard.git",
-        "sha": "08123a31ddc65d9d3c6cb3ae0e36cac1e4f461a9"
+        "sha": "70e9f79ca886f6148f0a81f4e9197be801e9a13b"
       },
       "policy": {
         "installation": "AVAILABLE",
@@ -96,7 +96,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/Sungmin-Cho/deep-memory.git",
-        "sha": "2835c890dbd43cc487e7b571c149637606522410"
+        "sha": "7d9a29204cd1369a7bf8bc4dd5713a1963e542f5"
       },
       "policy": {
         "installation": "AVAILABLE",
@@ -110,7 +110,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/Sungmin-Cho/deep-goal.git",
-        "sha": "d1e9c33aa1979279b093706d1dd8aff0e0a30152"
+        "sha": "02ccb6e11e29d292a707c22312ff7d7a7e0f63c4"
       },
       "policy": {
         "installation": "AVAILABLE",
