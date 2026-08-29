@@ -103,11 +103,11 @@
     },
     {
       "name": "deep-model-router",
-      "description": "Deterministic model/effort/review router — classifies delegated work and returns a RouteDecisionV1; large_context and latency_sensitive rebind worker_balanced to the Claude balanced seat; 1.5.0 adds fail-closed Grok envelope, artifact, and session-evidence contracts plus verified read-only reviewer seat profiles.",
+      "description": "Deterministic model/effort/review router — classifies delegated work and returns a RouteDecisionV1; large_context and latency_sensitive rebind worker_balanced to the Claude balanced seat; 1.5.0 adds fail-closed Grok envelope, artifact, and session-evidence contracts plus verified read-only reviewer seat profiles; 1.5.1 verifies grok-hosted grok.to_claude / grok.to_openai from Darwin.",
       "source": {
         "source": "url",
         "url": "https://github.com/Sungmin-Cho/deep-model-router.git",
-        "sha": "f9e8d07220c7058cf6efb36003b3fb086718e86d"
+        "sha": "6b36938bac72f8a3a462bcef136f8f579df73920"
       }
     }
   ]
