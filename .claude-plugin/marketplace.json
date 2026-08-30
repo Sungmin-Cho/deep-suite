@@ -92,7 +92,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/Sungmin-Cho/deep-loop.git",
-        "sha": "2af3b0aaf5d4eb6217948160015461975e236a57"
+        "sha": "3eb24259377d91bd1343f7ee62f1dafdc742f3a5"
       },
       "dependencies": [
         {
