@@ -43,11 +43,11 @@
     },
     {
       "name": "deep-review",
-      "description": "Independent Evaluator for AI coding agents. v2.8.1 unifies GROK_AUTHORIZED_MODEL so the router gate and the bridge argv assertion cannot disagree.",
+      "description": "Independent Evaluator for AI coding agents. v2.9.0 diagnoses reviewer-report admission and Grok containment refusals; --grok stays inactive.",
       "source": {
         "source": "url",
         "url": "https://github.com/Sungmin-Cho/deep-review.git",
-        "sha": "7fe489522608a397e5b119266eea89af6a54caff"
+        "sha": "f2ba0b98f8bc86cc2e7550f7eb282383372b1d29"
       }
     },
     {
