@@ -134,11 +134,11 @@
     },
     {
       "name": "deep-model-router",
-      "description": "Deterministic model/effort/review router — classifies delegated work and returns a RouteDecisionV1; large_context and latency_sensitive rebind worker_balanced to Claude; 1.6.0 adds strict host-seat declarations and route-invariant model/effort upgrade guidance.",
+      "description": "Deterministic model/effort/review router — classifies delegated work and returns a RouteDecisionV1; 1.8.0 ships the Claude Code grok write-capable maker seat under dispatch_agent grok-maker-v1 supervisor prevention.",
       "source": {
         "source": "url",
         "url": "https://github.com/Sungmin-Cho/deep-model-router.git",
-        "sha": "c8153046abcb4bb034fd7f6bdbbf774a650bc743"
+        "sha": "2a41b784f9066ca989861a08ecc8253240aea058"
       },
       "policy": {
         "installation": "INSTALLED_BY_DEFAULT",
