@@ -103,11 +103,11 @@
     },
     {
       "name": "deep-model-router",
-      "description": "Deterministic model/effort/review router — classifies delegated work and returns a RouteDecisionV1; 1.9.0 seats principal_architect on Claude Fable 5.1, boots grok/Codex Claude bridge seats without user-global MCP schemas (--strict-mcp-config), and stops a lone fallback from raising the review band.",
+      "description": "Deterministic model/effort/review router — classifies delegated work and returns a RouteDecisionV1; 1.10.0 seats principal_architect on Claude Fable 5.1, boots Claude bridge seats without user-global MCP schemas (--strict-mcp-config), binds every write-capable transport direction to a verification-ledger row, and stops a promoted route from contradicting the confidence it reports.",
       "source": {
         "source": "url",
         "url": "https://github.com/Sungmin-Cho/deep-model-router.git",
-        "sha": "8db489e7d7b0b78d8e0d717165726ca7c0fcd21f"
+        "sha": "1f95176db2f2fd2f7806038749bd43073225c77f"
       }
     }
   ]
