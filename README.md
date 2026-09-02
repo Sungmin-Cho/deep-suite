@@ -43,7 +43,7 @@ Built on the [Harness Engineering](https://martinfowler.com/articles/harness-eng
 | [deep-memory](https://github.com/Sungmin-Cho/deep-memory) | 1.0.6 | Cross-project semantic memory |
 | [deep-goal](https://github.com/Sungmin-Cho/deep-goal) | 1.2.1 | Goal condition compiler |
 | [deep-loop](https://github.com/Sungmin-Cho/deep-loop) | 1.22.0 | Loop Engineering control plane over the deep-suite |
-| [deep-model-router](https://github.com/Sungmin-Cho/deep-model-router) | 1.8.0 | Deterministic model/effort/review router |
+| [deep-model-router](https://github.com/Sungmin-Cho/deep-model-router) | 1.9.0 | Deterministic model/effort/review router |
 
 <!-- deep-suite:auto-generated:plugin-table-en:end -->
 
