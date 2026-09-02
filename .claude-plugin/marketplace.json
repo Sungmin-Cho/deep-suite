@@ -92,7 +92,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/Sungmin-Cho/deep-loop.git",
-        "sha": "3eb24259377d91bd1343f7ee62f1dafdc742f3a5"
+        "sha": "6fdbbf35e6b396b3ca55effca8bdf9a60c579b0a"
       },
       "dependencies": [
         {
@@ -103,11 +103,11 @@
     },
     {
       "name": "deep-model-router",
-      "description": "Deterministic model/effort/review router — classifies delegated work and returns a RouteDecisionV1; 1.11.1 grades a Claude --output-format json envelope alongside the grok one and carries its token counts into the receipt, refuses a quoted format spec as a verdict, recovers one a headless format ran into the narration, and records why the artifact identity pin cannot be replaced by a content check.",
+      "description": "Deterministic model/effort/review router — classifies delegated work and returns a RouteDecisionV1; 1.12.0 adds a separately verified read-only grok-to-Claude reviewer seat, binds its concrete permission/tool evidence, and records host-dependent MCP boot savings and headless supervisor boundaries.",
       "source": {
         "source": "url",
         "url": "https://github.com/Sungmin-Cho/deep-model-router.git",
-        "sha": "84abc4201f740f22541c77b5f97d4ec895d89d22"
+        "sha": "6ebc793e968f156dafaf17cc471b5d0b20d2e45e"
       }
     }
   ]
