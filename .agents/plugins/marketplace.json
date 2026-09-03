@@ -134,11 +134,11 @@
     },
     {
       "name": "deep-model-router",
-      "description": "Deterministic model/effort/review router — classifies delegated work and returns a RouteDecisionV1; 1.12.1 adds a separately verified read-only grok-to-Claude reviewer seat, grades a Claude --output-format json envelope alongside the grok one, and refuses a quoted format spec as a verdict.",
+      "description": "Deterministic model/effort/review router — classifies delegated work and returns a RouteDecisionV1; 1.13.0 adds a second axis, so execution difficulty picks the worker (and floors its effort) while risk still alone picks the review depth, with the previous release vendored as a differential oracle proving no route got weaker.",
       "source": {
         "source": "url",
         "url": "https://github.com/Sungmin-Cho/deep-model-router.git",
-        "sha": "754c01725af01fd984be659c74742ec11a99bc24"
+        "sha": "6cdae88903a70fc028a3d4b3597877a1c1b364fc"
       },
       "policy": {
         "installation": "INSTALLED_BY_DEFAULT",
