@@ -13,7 +13,7 @@ The repositories were renamed from `claude-deep-*` to runtime-neutral `deep-*` o
 | deep-work | 7.3.0 | Evidence-Driven Development Protocol |
 | deep-wiki | 1.10.1 | Exact worker contracts with bounded timeout fallback and journaled wiki mutation |
 | deep-evolve | 3.6.3 | Autonomous Experimentation Protocol |
-| deep-review | 2.9.0 | Independent Evaluator for AI coding agents |
+| deep-review | 2.10.0 | Independent Evaluator for AI coding agents |
 | deep-docs | 1.7.0 | Document gardening + authoring |
 | deep-dashboard | 1.5.1 | Cross-plugin harness diagnostics + suite telemetry |
 | deep-memory | 1.0.6 | Cross-project semantic memory |

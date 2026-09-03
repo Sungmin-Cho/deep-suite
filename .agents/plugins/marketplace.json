@@ -50,11 +50,11 @@
     },
     {
       "name": "deep-review",
-      "description": "Independent Evaluator for AI coding agents. v2.9.0 diagnoses reviewer-report admission and Grok containment refusals; --grok stays inactive.",
+      "description": "Independent Evaluator for AI coding agents. v2.10.0 enables --grok on linux/x64 from the tagged release; win32 stays platform_verification_pending; main stays binary-free.",
       "source": {
         "source": "url",
         "url": "https://github.com/Sungmin-Cho/deep-review.git",
-        "sha": "f2ba0b98f8bc86cc2e7550f7eb282383372b1d29"
+        "sha": "d1e6774adbc0f8b441d649554e6665aff80e7231"
       },
       "policy": {
         "installation": "AVAILABLE",
