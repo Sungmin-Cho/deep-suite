@@ -103,11 +103,11 @@
     },
     {
       "name": "deep-model-router",
-      "description": "Deterministic model/effort/review router — classifies delegated work and returns a RouteDecisionV1; 1.13.0 adds a second axis, so execution difficulty picks the worker (and floors its effort) while risk still alone picks the review depth, with the previous release vendored as a differential oracle proving no route got weaker.",
+      "description": "Deterministic model/effort/review router for Claude Code, Codex, and Grok. Version 1.14.0 adds GPT-6 Astra, source-author exclusions, joint reviewer allocation, strict execution evidence, an optional Darwin receipt guard, and measured model diagnostics. Worker difficulty and review risk remain separate; Sol stays the reasoning default.",
       "source": {
         "source": "url",
         "url": "https://github.com/Sungmin-Cho/deep-model-router.git",
-        "sha": "6cdae88903a70fc028a3d4b3597877a1c1b364fc"
+        "sha": "eebd8414d560fd1256476ad31b501cfcfc9ea068"
       }
     }
   ]
