@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "envelope": {
+    "producer": "deep-work",
+    "producer_version": "7.4.0",
+    "artifact_kind": "slice-receipt",
+    "run_id": "01K7DW55NHABCDEFGHJKMNPQRS",
+    "session_id": "s-1234abcd",
+    "parent_run_id": "01K7DW22NHABCDEFGHJKMNPQRS",
+    "generated_at": "2026-09-06T00:00:00Z",
+    "schema": { "name": "slice-receipt", "version": "1.1" },
+    "git": {
+      "head": "70a1474246d9ed5859a2ce3913b66da4d9db0eae",
+      "branch": "main",
+      "dirty": false
+    },
+    "provenance": {
+      "source_artifacts": [],
+      "tool_versions": { "node": "v22.23.2" }
+    }
+  },
+  "payload": {
+    "schema_version": "1.1",
+    "slice_id": "SLICE-003",
+    "status": "complete",
+    "tdd": {
+      "state_transitions": ["RED_VERIFIED"]
+    },
+    "completion_basis": "outcome-v1",
+    "runtime_receipt_ref": {
+      "path": ".deep-work/s-1234abcd/runtime-receipts/SLICE-003.json",
+      "sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "producer_operation_id": "op-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "publication_operation_id": "op-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "recovery_generation": 0,
+    "goal_acceptance": {
+      "required_ids": ["REQ-001"],
+      "accepted_ids": ["REQ-001"],
+      "complete": true
+    }
+  }
+}
