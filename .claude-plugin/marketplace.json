@@ -43,11 +43,11 @@
     },
     {
       "name": "deep-review",
-      "description": "Independent Evaluator for AI coding agents. v2.10.0 enables --grok on linux/x64 from the tagged release; win32 stays platform_verification_pending; main stays binary-free.",
+      "description": "Independent Evaluator for AI coding agents. v2.11.0 binds prepared review to source-bound adjudication and positive confirmation; main stays binary-free.",
       "source": {
         "source": "url",
         "url": "https://github.com/Sungmin-Cho/deep-review.git",
-        "sha": "d1e6774adbc0f8b441d649554e6665aff80e7231"
+        "sha": "c17a8efe3f8edabcb6f92bd0d1dfabf6dd8a6e58"
       }
     },
     {
