@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "envelope": {
+    "producer": "deep-work",
+    "producer_version": "7.4.0",
+    "artifact_kind": "session-receipt",
+    "run_id": "01K7DW22NHABCDEFGHJKMNPQRS",
+    "session_id": "s-1234abcd",
+    "parent_run_id": "01K7DW22NHABCDEFGHJKMNPQRS",
+    "generated_at": "2026-09-06T00:00:00Z",
+    "schema": { "name": "session-receipt", "version": "1.1" },
+    "git": {
+      "head": "70a1474246d9ed5859a2ce3913b66da4d9db0eae",
+      "branch": "main",
+      "dirty": false
+    },
+    "provenance": {
+      "source_artifacts": [],
+      "tool_versions": { "node": "v22.23.2" }
+    }
+  },
+  "payload": {
+    "schema_version": "1.1",
+    "session_id": "s-1234abcd",
+    "started_at": "2026-09-06T00:00:00Z",
+    "outcome": "keep",
+    "slices": { "total": 1, "completed": 1 },
+    "quality_score": null,
+    "metric_version": 2,
+    "execution_basis_counts": { "strict_tdd_v2": 0, "outcome_v1": 1 },
+    "goal_acceptance": {
+      "required_ids": ["REQ-001"],
+      "accepted_ids": ["REQ-001"],
+      "complete": true
+    },
+    "effect_facts": {
+      "outcome": "keep",
+      "invoked": false,
+      "adopted": false,
+      "state": "not-required",
+      "reference": null
+    },
+    "publication_operation_id": "op-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "forged": true
+  }
+}
