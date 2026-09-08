@@ -18,7 +18,7 @@ The repositories were renamed from `claude-deep-*` to runtime-neutral `deep-*` o
 | deep-dashboard | 1.5.1 | Cross-plugin harness diagnostics + suite telemetry |
 | deep-memory | 1.0.6 | Cross-project semantic memory |
 | deep-goal | 1.2.1 | Goal condition compiler |
-| deep-loop | 1.23.0 | Loop Engineering control plane over the deep-suite |
+| deep-loop | 1.24.0 | Loop Engineering control plane over the deep-suite |
 | deep-model-router | 1.14.0 | Deterministic model/effort/review router for Claude Code, Codex, and Grok |
 
 <!-- deep-suite:auto-generated:plugin-table-agents:end -->
