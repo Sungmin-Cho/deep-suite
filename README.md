@@ -35,7 +35,7 @@ Built on the [Harness Engineering](https://martinfowler.com/articles/harness-eng
 | Plugin | Version | Description |
 |---|---|---|
 | [deep-work](https://github.com/Sungmin-Cho/deep-work) | 7.4.0 | Evidence-Driven Development Protocol |
-| [deep-wiki](https://github.com/Sungmin-Cho/deep-wiki) | 1.10.1 | Exact worker contracts with bounded timeout fallback and journaled wiki mutation |
+| [deep-wiki](https://github.com/Sungmin-Cho/deep-wiki) | 1.11.0 | Main-caller ingest on every host with no shipped subagents and journaled wiki mutation |
 | [deep-evolve](https://github.com/Sungmin-Cho/deep-evolve) | 3.6.3 | Autonomous Experimentation Protocol |
 | [deep-review](https://github.com/Sungmin-Cho/deep-review) | 2.11.0 | Independent Evaluator for AI coding agents |
 | [deep-docs](https://github.com/Sungmin-Cho/deep-docs) | 1.7.0 | Document gardening + authoring |
@@ -303,8 +303,7 @@ Raw Sources  →  Wiki (markdown pages)  →  Schema (management rules)
 - **Auto-lint** — runs after every ingest and rebuild
 - **Auto-filing** — query results that synthesize 2+ pages are filed back into the wiki
 - **Obsidian-compatible** — works as an Obsidian vault
-- **Subagent delegation for page I/O** — every ingest dispatches to a dedicated `wiki-synthesizer-{analysis,worker}` agent that owns source reading, create-vs-update judgment, and page writing; main session keeps only the small metadata footprint (`index.json`, `log.jsonl`, `sources/*.yaml`)
-- **Trust-boundary closure** — active synthesizer agents have `Write`/`Edit` physically removed from their tool manifests; main session is the sole writer under a single global lock
+- **Main-caller ingest (v1.11.0)** — `/wiki-ingest` analyzes sources and writes page bodies in the host's main session on both Claude Code and Codex, so every body is written with the full source and the current page in view; the plugin ships no subagents, and the Node runtime stays the sole writer under a single global lock
 - **Auto-ingest hook** — in Claude Code, the `SessionStart` hook detects modified `.md` files in the vault and triggers `/wiki-ingest` automatically; opt-in via `auto_ingest:` config block. Codex uses the explicit `$deep-wiki:wiki-ingest` skill entry.
 - **M3 envelope adoption** — `index.json` is wrapped in the cross-plugin envelope for traceability; legacy payload preserved verbatim for forward-compat
 - **Native Windows lock reliability (v1.8.2)** — the atomic-write ownership seal tolerates the libuv ≥1.49 fstat/lstat `st_dev` asymmetry on Windows 11 24H2 / Server 2025 via a directional device-compatibility predicate, fixing permanent wiki-lock-acquisition failure

@@ -35,7 +35,7 @@ After:   deep-work가 리서치 → 명세 → 계획 → TDD → 리시트 실�
 | 플러그인 | 버전 | 설명 |
 |---|---|---|
 | [deep-work](https://github.com/Sungmin-Cho/deep-work) | 7.4.0 | Evidence-Driven Development Protocol |
-| [deep-wiki](https://github.com/Sungmin-Cho/deep-wiki) | 1.10.1 | Exact worker contracts with bounded timeout fallback and journaled wiki mutation |
+| [deep-wiki](https://github.com/Sungmin-Cho/deep-wiki) | 1.11.0 | Main-caller ingest on every host with no shipped subagents and journaled wiki mutation |
 | [deep-evolve](https://github.com/Sungmin-Cho/deep-evolve) | 3.6.3 | Autonomous Experimentation Protocol |
 | [deep-review](https://github.com/Sungmin-Cho/deep-review) | 2.11.0 | Independent Evaluator for AI coding agents |
 | [deep-docs](https://github.com/Sungmin-Cho/deep-docs) | 1.7.0 | Document gardening + authoring |
@@ -307,8 +307,7 @@ Raw Sources  →  Wiki (markdown pages)  →  Schema (management rules)
 - **Auto-lint** — ingest/rebuild 후 자동 실행
 - **Auto-filing** — 2+ 페이지를 synthesize한 query 결과는 wiki로 자동 file
 - **Obsidian 호환** — Obsidian vault로 동작
-- **Subagent 위임** — ingest마다 `wiki-synthesizer-{analysis,worker}` 에이전트가 소스 읽기, create-vs-update 판정, 페이지 쓰기 담당; main 세션은 작은 메타데이터(`index.json`, `log.jsonl`, `sources/*.yaml`)만 보유
-- **Trust-boundary 폐쇄** — 활성 synthesizer 에이전트의 tool manifest에서 `Write`/`Edit` 물리적 제거; main 세션이 단일 global lock 아래 유일한 writer
+- **Main-caller ingest (v1.11.0)** — Claude Code와 Codex 모두 `/wiki-ingest`가 host main 세션에서 소스 분석과 페이지 본문 작성을 수행해, 모든 본문이 전체 소스와 현재 페이지를 보며 작성됨; 플러그인은 subagent를 배포하지 않으며 Node runtime이 단일 global lock 아래 유일한 writer로 유지
 - **Auto-ingest 훅** — Claude Code에서는 `SessionStart` hook이 vault 수정 `.md` 감지 후 `/wiki-ingest` 자동 트리거; `auto_ingest:` config로 opt-in. Codex에서는 명시적으로 `$deep-wiki:wiki-ingest` skill entry를 호출한다.
 - **M3 envelope 채택** — `index.json`이 cross-plugin envelope로 wrap; legacy payload는 forward-compat 위해 그대로 보존
 - **네이티브 Windows lock 신뢰성 (v1.8.2)** — atomic write 소유권 seal이 Windows 11 24H2 / Server 2025의 libuv ≥1.49 fstat/lstat `st_dev` 비대칭을 방향성 device-compatibility 술어로 허용하여, wiki lock 획득 영구 실패를 수정
