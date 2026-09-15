@@ -24,13 +24,13 @@
     },
     {
       "name": "deep-wiki",
-      "description": "Exact worker contracts with bounded timeout fallback and journaled wiki mutation",
+      "description": "Main-caller ingest on every host with no shipped subagents and journaled wiki mutation",
       "source": {
         "source": "url",
         "url": "https://github.com/Sungmin-Cho/deep-wiki.git",
-        "sha": "d5babf0203c23bde7ad2a30046a82e26e0d80ec3"
+        "sha": "307269f667a6b5d79fe19710e05df39cbeeed072"
       },
-      "sha": "d5babf0203c23bde7ad2a30046a82e26e0d80ec3"
+      "sha": "307269f667a6b5d79fe19710e05df39cbeeed072"
     },
     {
       "name": "deep-evolve",

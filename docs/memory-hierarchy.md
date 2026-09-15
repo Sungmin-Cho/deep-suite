@@ -41,7 +41,7 @@ Authoritative component declaration consumed by Claude Code. The suite never res
 In-repo rules that apply to *agents working inside that plugin's repo*. Examples:
 
 - deep-work's TDD mode policy (when `tdd_mode=strict` applies vs not)
-- deep-wiki's qualified-namespace dispatch rule (`deep-wiki:wiki-X`, no `general-purpose` fallback)
+- deep-wiki's no-subagent rule (`/wiki-ingest` runs in the main caller on every host; `npm run lint:agents` fails if an agent definition returns)
 - deep-review's evaluator trust-boundary (no event-driven hooks; user-invocation only)
 
 These do **not** propagate to the suite repo. When the suite needs to know about a plugin's invariant (e.g., "deep-review has no hooks"), it gets recorded in `suite-extensions.json` (`hooks_intentionally_empty_reason`).
