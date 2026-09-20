@@ -34,7 +34,7 @@ Built on the [Harness Engineering](https://martinfowler.com/articles/harness-eng
 
 | Plugin | Version | Description |
 |---|---|---|
-| [deep-work](https://github.com/Sungmin-Cho/deep-work) | 7.4.0 | Evidence-Driven Development Protocol |
+| [deep-work](https://github.com/Sungmin-Cho/deep-work) | 7.4.1 | Evidence-Driven Development Protocol |
 | [deep-wiki](https://github.com/Sungmin-Cho/deep-wiki) | 1.11.0 | Main-caller ingest on every host with no shipped subagents and journaled wiki mutation |
 | [deep-evolve](https://github.com/Sungmin-Cho/deep-evolve) | 3.6.3 | Autonomous Experimentation Protocol |
 | [deep-review](https://github.com/Sungmin-Cho/deep-review) | 2.11.0 | Independent Evaluator for AI coding agents |
