@@ -24,13 +24,13 @@
     },
     {
       "name": "deep-wiki",
-      "description": "Main-caller ingest on every host with no shipped subagents and journaled wiki mutation",
+      "description": "Blocked terminal-prune diagnostics with a preserve-first quarantine plan and journaled wiki mutation",
       "source": {
         "source": "url",
         "url": "https://github.com/Sungmin-Cho/deep-wiki.git",
-        "sha": "307269f667a6b5d79fe19710e05df39cbeeed072"
+        "sha": "19a378b0c9fcda21638dcbe7c82bed9cb86f0ded"
       },
-      "sha": "307269f667a6b5d79fe19710e05df39cbeeed072"
+      "sha": "19a378b0c9fcda21638dcbe7c82bed9cb86f0ded"
     },
     {
       "name": "deep-evolve",
