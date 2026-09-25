@@ -35,7 +35,7 @@ Built on the [Harness Engineering](https://martinfowler.com/articles/harness-eng
 | Plugin | Version | Description |
 |---|---|---|
 | [deep-work](https://github.com/Sungmin-Cho/deep-work) | 7.4.1 | Evidence-Driven Development Protocol |
-| [deep-wiki](https://github.com/Sungmin-Cho/deep-wiki) | 1.11.0 | Main-caller ingest on every host with no shipped subagents and journaled wiki mutation |
+| [deep-wiki](https://github.com/Sungmin-Cho/deep-wiki) | 1.12.0 | Blocked terminal-prune diagnostics with a preserve-first quarantine plan and journaled wiki mutation |
 | [deep-evolve](https://github.com/Sungmin-Cho/deep-evolve) | 3.6.3 | Autonomous Experimentation Protocol |
 | [deep-review](https://github.com/Sungmin-Cho/deep-review) | 2.11.0 | Independent Evaluator for AI coding agents |
 | [deep-docs](https://github.com/Sungmin-Cho/deep-docs) | 1.7.0 | Document gardening + authoring |
@@ -311,6 +311,7 @@ Raw Sources  →  Wiki (markdown pages)  →  Schema (management rules)
 - **Completed scan-window reclamation (v1.9.4)** — `wiki-lint --fix` safely retires completed ensure journals when sealed marker and reservation evidence proves recovery is no longer needed, while ambiguous or malformed transaction state remains fail closed
 - **Lock contention observability (v1.9.5)** — `lock acquire --json` emits one stable exit-3 JSON envelope with a token-free canonical holder, degrades ambiguous owner evidence to `holder: null`, and normalizes active release-transition contention without changing recovery or lock ownership semantics
 - **Oversized transaction isolation (v1.10.0)** — an oversized leftover transaction directory is classified `TRANSACTION_OVERSIZED` and stepped over by lock-free readers and lock-held writers instead of wedging every route on a permanent `DEADLINE_EXCEEDED`; isolatable trees are relocated into sealed `.wiki-meta/.quarantine/` bundles that are never auto-deleted, and `transaction recover … --json` self-locks when no lock token is supplied so the rollback-quarantine `follow_up` is directly executable
+- **Blocked prune diagnostics (v1.12.0)** — when a terminal-prune quarantine is refused by a safety check, `wiki-lint --fix` reports each blocked store entry with its stage, reason and exact count instead of a generic `TRANSACTION_RECOVERY_REQUIRED`, and the CLI prints a reviewable, preserve-first `transaction quarantine` plan (canonical directory first, allowlisted names only, never executed); safety checks and deletion authority are unchanged
 
 [Full documentation →](https://github.com/Sungmin-Cho/deep-wiki)
 
