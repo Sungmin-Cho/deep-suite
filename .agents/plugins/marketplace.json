@@ -134,11 +134,11 @@
     },
     {
       "name": "deep-model-router",
-      "description": "Deterministic model/effort/review router for Claude Code, Codex, and Grok. Version 1.16.0 follows each model lineage on your machine: a local overlay finds a successor id in the CLI catalogs, verifies it with contained read-only probes and routes on it, with policy_pin to reproduce a retained generation and a SessionStart tick hook. The senior seat moves to Claude Opus 5.5 with its tier inherited, not re-measured; the OpenAI Sol and Luna successors follow in a patch release. Worker difficulty and review risk remain separate; Sol stays the reasoning default.",
+      "description": "Deterministic model/effort/review router for Claude Code, Codex, and Grok. Version 1.16.1 seats GPT-6 Sol and GPT-6 Luna in the reasoning and fast-worker seats after the local overlay's contained and maker-seat probes, at lower list prices, with each tier inherited, not re-measured. The overlay follows each model lineage on your machine, verifies successor ids with read-only probes, supports policy_pin to reproduce a retained generation, and now releases a quota deferral as soon as a fresh reading has room. Worker difficulty and review risk remain separate.",
       "source": {
         "source": "url",
         "url": "https://github.com/Sungmin-Cho/deep-model-router.git",
-        "sha": "8824bac403936e4b763be89c459f9a60d56ce298"
+        "sha": "77ec747d57d09b06e913255aad690a81dc31a2d4"
       },
       "policy": {
         "installation": "INSTALLED_BY_DEFAULT",
