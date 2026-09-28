@@ -134,11 +134,11 @@
     },
     {
       "name": "deep-model-router",
-      "description": "Deterministic model/effort/review router for Claude Code, Codex, and Grok. Version 1.16.1 seats GPT-6 Sol and GPT-6 Luna in the reasoning and fast-worker seats after the local overlay's contained and maker-seat probes, at lower list prices, with each tier inherited, not re-measured. The overlay follows each model lineage on your machine, verifies successor ids with read-only probes, supports policy_pin to reproduce a retained generation, and now releases a quota deferral as soon as a fresh reading has room. Worker difficulty and review risk remain separate.",
+      "description": "Deterministic model/effort/review router for Claude Code, Codex, and Grok. Version 1.17.0 sizes review to the band: a LOW review is the deterministic checks the route names, the MEDIUM reviewer fits the band floor and the implementer's tier, uncertainty is counted once, a REVIEW task's lead counts among its reviewers, and a declared capability failure can retry the same model one effort higher. Callers can declare the implementer of finished work and a family quota reading; routes weaker than 1.16 are listed per rule in the CHANGELOG. Worker difficulty and review risk remain separate.",
       "source": {
         "source": "url",
         "url": "https://github.com/Sungmin-Cho/deep-model-router.git",
-        "sha": "77ec747d57d09b06e913255aad690a81dc31a2d4"
+        "sha": "ce5fb05de686257d1e3fbce611aeeee9af439380"
       },
       "policy": {
         "installation": "INSTALLED_BY_DEFAULT",
