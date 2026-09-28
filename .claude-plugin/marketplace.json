@@ -92,7 +92,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/Sungmin-Cho/deep-loop.git",
-        "sha": "0b5a2c33a9d093da9ce25cb0b8cb66441d8c5a1f"
+        "sha": "e91c5043379a0e09d4dfcce56c1e63fa4932386b"
       },
       "dependencies": [
         {
@@ -107,7 +107,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/Sungmin-Cho/deep-model-router.git",
-        "sha": "ce5fb05de686257d1e3fbce611aeeee9af439380"
+        "sha": "ab677bf46a7e96c5f2525dcd7659fa9918bedb6d"
       }
     }
   ]
