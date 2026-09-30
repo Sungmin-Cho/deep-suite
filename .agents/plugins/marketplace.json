@@ -134,11 +134,11 @@
     },
     {
       "name": "deep-model-router",
-      "description": "Deterministic model/effort/review router for Claude Code, Codex, and Grok. Version 1.17.0 sizes review to the band: a LOW review is the deterministic checks the route names, the MEDIUM reviewer fits the band floor and the implementer's tier, uncertainty is counted once, a REVIEW task's lead counts among its reviewers, and a declared capability failure can retry the same model one effort higher. Callers can declare the implementer of finished work and a family quota reading; routes weaker than 1.16 are listed per rule in the CHANGELOG. Worker difficulty and review risk remain separate.",
+      "description": "Deterministic model/effort/review router for Claude Code, Codex, and Grok. Version 1.17.1 seats GPT-6.1 Sol and Claude Sonnet 5.5 after the local overlay's contained probes, with each tier inherited, not re-measured, maps MINIMAL effort to low for the new Sol, and discloses provider-side substitution on the Opus and Sonnet seats. Every tier and binding stays in place; the vendor benchmarks and a replay of the rejected tier changes are on record. Review stays sized to the band, and worker difficulty and review risk remain separate.",
       "source": {
         "source": "url",
         "url": "https://github.com/Sungmin-Cho/deep-model-router.git",
-        "sha": "ab677bf46a7e96c5f2525dcd7659fa9918bedb6d"
+        "sha": "ac8c50b1214c4d7e4bcfbc3e4f437b2e22923044"
       },
       "policy": {
         "installation": "INSTALLED_BY_DEFAULT",
