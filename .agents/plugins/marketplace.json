@@ -134,11 +134,11 @@
     },
     {
       "name": "deep-model-router",
-      "description": "Deterministic model/effort/review router for Claude Code, Codex, and Grok. Version 1.17.1 seats GPT-6.1 Sol and Claude Sonnet 5.5 after the local overlay's contained probes, with each tier inherited, not re-measured, maps MINIMAL effort to low for the new Sol, and discloses provider-side substitution on the Opus and Sonnet seats. Every tier and binding stays in place; the vendor benchmarks and a replay of the rejected tier changes are on record. Review stays sized to the band, and worker difficulty and review risk remain separate.",
+      "description": "Deterministic model/effort/review router for Claude Code, Codex, and Grok. Version 1.17.2 records the attended maker-seat probes for GPT-6.1 Sol and Claude Sonnet 5.5 and a preregistered tier check: on a replay of a real review from this repository, Claude Sonnet 5.5 found 21% of the known defects against 31–42% for the tier-2 seats and 8% for its predecessor, so it stays at tier 1 on measured evidence. Every tier and binding stays in place; review stays sized to the band, and worker difficulty and review risk remain separate.",
       "source": {
         "source": "url",
         "url": "https://github.com/Sungmin-Cho/deep-model-router.git",
-        "sha": "ac8c50b1214c4d7e4bcfbc3e4f437b2e22923044"
+        "sha": "b99b65f5692b545275176323354f79faa785075f"
       },
       "policy": {
         "installation": "INSTALLED_BY_DEFAULT",
