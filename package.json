@@ -12,7 +12,7 @@
     "validate-artifact-fixtures": "node scripts/validate-artifact-fixtures.js",
     "docs:check": "node scripts/generate-reference-sections.js --check",
     "docs:write": "node scripts/generate-reference-sections.js --write",
-    "docs:sync": "node scripts/check-readme-plugin-table.js && node scripts/check-agents-md-paths.js && node scripts/check-guide-version.js && node scripts/check-semver-sha-sync.js && node scripts/check-pinned-plugin-paths.js && node scripts/check-memory-hierarchy.js && node scripts/check-plugin-count.js && node scripts/check-fixture-provenance.js",
+    "docs:sync": "node scripts/check-readme-plugin-table.js && node scripts/check-agents-md-paths.js && node scripts/check-guide-version.js && node scripts/check-semver-sha-sync.js && node scripts/check-pinned-plugin-paths.js && node scripts/check-memory-hierarchy.js && node scripts/check-plugin-count.js && node scripts/check-fixture-provenance.js && node scripts/check-hooks-coverage.js",
     "preflight": "npm run validate && npm run docs:check && npm run docs:sync && npm run validate-artifact-fixtures && npm test",
     "release:bump": "node scripts/release-bump.js",
     "prepare": "node scripts/install-hooks.js"

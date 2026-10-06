@@ -13,6 +13,7 @@ Suite-level tooling. Each script is self-contained and runnable from the repo ro
 | `check-guide-version.js` | Verify `**<plugin> vX.Y.Z**` claims in guides match pinned plugin.json.version | `0` clean, `1` mismatch, `2` IO/usage/fetch |
 | `check-semver-sha-sync.js` | Verify marketplace.entry.sha → plugin.json.version → suite docs marker tables agree (cache-key drift guard) | `0` clean, `1` drift, `2` IO/usage/fetch |
 | `check-pinned-plugin-paths.js` | Verify sidecar artifact paths appear in pinned plugin source (W-R1, W-R2 absorber) | `0` clean, `1` drift, `2` IO/fetch |
+| `check-hooks-coverage.js` | Verify sidecar `hooks_active` equals the hook events in the pinned `hooks/hooks.json` ∪ the Claude/Codex manifest `hooks` files and inline maps; empty list needs `hooks_intentionally_empty_reason`, non-empty list must not carry one; `modules` is reported only | `0` clean, `1` drift, `2` IO/usage/fetch |
 | `check-memory-hierarchy.js` | Detect cross-plugin policy conflicts using a keyword dictionary (suite ↔ each plugin's docs at pinned SHA) | `0` clean, `1` conflict, `2` IO/usage/fetch |
 | `check-plugin-count.js` | Verify plugin-count narrative ("N plugins") against `marketplace.plugins.length`; curated subsets assert their own literal and cross-check the "Reflects …" preamble | `0` clean, `1` drift, `2` IO/usage |
 | `check-fixture-provenance.js` | Verify each real-emit envelope fixture's root `x-provenance.captured_at_sha` still equals its producer's marketplace pin | `0` clean, `1` drift, `2` IO/usage |
@@ -53,12 +54,12 @@ Suite-level tooling. Each script is self-contained and runnable from the repo ro
 
 ## M2 Manifest-Doc Sync
 
-The `generate-reference-sections.js` + 8 `check-*.js` scripts together implement M2. They run on every PR + push to main + daily cron via `.github/workflows/manifest-doc-sync.yml`. Each script is independently runnable for local debugging:
+The `generate-reference-sections.js` + 9 `check-*.js` scripts together implement M2. They run on every PR + push to main + daily cron via `.github/workflows/manifest-doc-sync.yml`. Each script is independently runnable for local debugging:
 
 ```bash
 npm run docs:check     # generator drift gate
 npm run docs:write     # regenerate marker blocks
-npm run docs:sync      # all 8 check-* scripts
+npm run docs:sync      # all 9 check-* scripts
 ```
 
 The cache (`.deep-suite-cache/<plugin>-<sha>/`) is gitignored and shared across runs. CI populates it via `gh api` (uses `${{ secrets.GITHUB_TOKEN }}`); local devs need `gh auth login` once.

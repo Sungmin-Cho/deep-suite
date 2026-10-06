@@ -144,7 +144,7 @@
         "hooks_intentionally_empty_reason": {
           "type": "string",
           "minLength": 1,
-          "description": "Required when hooks_active is [] AND the plugin's hooks/hooks.json has \"hooks\": {}. Documents trust-boundary intent (e.g., 'Evaluator는 user-invocation 기반 trust-boundary 설계')."
+          "description": "Required when hooks_active is [], and must be absent otherwise (enforced by scripts/check-hooks-coverage.js, not by this schema). Documents trust-boundary intent (e.g., 'Evaluator는 user-invocation 기반 trust-boundary 설계')."
         },
         "consumer_only": {
           "type": "boolean",

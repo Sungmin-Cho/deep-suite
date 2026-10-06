@@ -16,6 +16,7 @@ const DEFAULT_CHECKER_TIMEOUT_MS = 30_000;
 const COLD_CACHE_CHECKER_TIMEOUT_MS = 120_000;
 const COLD_CACHE_CHECKERS = new Set([
   'check-pinned-plugin-paths.js',
+  'check-hooks-coverage.js',
   'check-memory-hierarchy.js',
 ]);
 
@@ -38,6 +39,7 @@ const fixtureDir = resolve(repoRoot, 'tests/fixtures/plugin-cache');
 
 test('cold-cache network checkers outlive one 30-second GitHub request budget', () => {
   const expectedColdCacheCheckers = [
+    'check-hooks-coverage.js',
     'check-memory-hierarchy.js',
     'check-pinned-plugin-paths.js',
   ];

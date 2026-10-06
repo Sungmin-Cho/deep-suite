@@ -49,10 +49,18 @@ The two SemVer-bearing fields (envelope `producer_version` and the plugin's `plu
 
 ## `hooks_intentionally_empty_reason` invariant
 
-Schema cannot express "required when `hooks_active` is `[]` AND the plugin's `hooks/hooks.json` declares `{}`" (it's a conditional cross-file constraint). This invariant is enforced **outside the schema**:
+The schema cannot express this conditional cross-file constraint: whether `hooks_intentionally_empty_reason` is required depends on the plugin's pinned hook configurations as well as `hooks_active`. `consumer_only` is defined-but-unused and does not exempt a plugin from this policy.
 
-- Today: documented expectation; PR reviewers catch violations. The current sidecar (`.claude-plugin/suite-extensions.json`) records a reason for `deep-review`, `deep-docs`, and `deep-dashboard`. The `consumer_only` field is defined in the schema for future read-only consumers but is currently unused in the live sidecar.
-- Future: M5 hook pattern guide may add a `scripts/check-hooks-coverage.js` lint that asserts every plugin with empty hooks has either a non-empty `hooks_intentionally_empty_reason` or `consumer_only: true`.
+`scripts/check-hooks-coverage.js` enforces the invariant in `npm run docs:sync`, and therefore in `preflight`, the pre-push hook, and the `manifest-doc-sync` CI workflow. It applies these rules:
+
+- `hooks_active` must equal the event set found in the union of `hooks/hooks.json` and every hooks file or inline config named by the `hooks` field of `.claude-plugin/plugin.json` (required at the pin) and `.codex-plugin/plugin.json` (optional). A hooks file wraps its event map in a top-level `hooks` key; an inline manifest object is the event map itself.
+- An empty `hooks_active` list requires a non-empty `hooks_intentionally_empty_reason`; `consumer_only` does not exempt it.
+- A non-empty `hooks_active` list must not carry `hooks_intentionally_empty_reason`.
+- `modules` declarations are reported as notes only; they are not gated. The note says so when more than one hooks file of a plugin declares `modules`, since Claude Code then loads neither.
+- Each manifest must be a JSON object, and every hooks file it names (including an explicitly named `./hooks/hooks.json`) must exist at the pin, as Claude Code refuses a declared path that is missing. Only the undeclared default `hooks/hooks.json` may be absent.
+- Only a 404 for a path counts as "file absent"; any other fetch failure (including a missing `gh` CLI) aborts with exit 2.
+
+The current sidecar records a reason for `deep-review`, `deep-docs`, `deep-dashboard`, and `deep-goal`.
 
 ## `data_flow.via` is a display-only label
 

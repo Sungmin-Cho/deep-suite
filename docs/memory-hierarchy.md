@@ -88,7 +88,7 @@ The check fetches via `scripts/lib/fetch-plugin-files.js`, so it shares the `.de
 1. Append a row to the conflict catalog above with rule + failure phrasing.
 2. Append a corresponding rule to `scripts/check-memory-hierarchy.js` `POLICIES` array.
 3. Add a fixture under `tests/fixtures/plugin-cache/<plugin>/` that triggers + passes the new rule.
-4. Add a test case to `tests/cli-sync-checkers.test.js` (the spawn-based suite that covers all eight checkers; a dedicated `tests/check-memory-hierarchy.test.js` is **not** maintained — keep the test surface unified).
+4. Add a test case to `tests/cli-sync-checkers.test.js` (the spawn-based suite for the original eight doc-sync checkers — `check-hooks-coverage.js` keeps its own pure-function suite in `tests/check-hooks-coverage.test.js`; a dedicated `tests/check-memory-hierarchy.test.js` is **not** maintained — keep the test surface unified).
 
 If the new policy is *security-shaped*, also bump AGENTS.md § Conventions to record the rationale (so future maintainers don't relax it without history).
 
