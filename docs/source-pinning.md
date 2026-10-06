@@ -17,7 +17,7 @@ Each plugin is fetched from the SHA below at install time. M2 CI re-checks daily
 | deep-memory | 1.0.6 | [`Sungmin-Cho/deep-memory`](https://github.com/Sungmin-Cho/deep-memory) | [`7d9a292`](https://github.com/Sungmin-Cho/deep-memory/commit/7d9a29204cd1369a7bf8bc4dd5713a1963e542f5) |
 | deep-goal | 1.2.1 | [`Sungmin-Cho/deep-goal`](https://github.com/Sungmin-Cho/deep-goal) | [`02ccb6e`](https://github.com/Sungmin-Cho/deep-goal/commit/02ccb6e11e29d292a707c22312ff7d7a7e0f63c4) |
 | deep-loop | 1.25.0 | [`Sungmin-Cho/deep-loop`](https://github.com/Sungmin-Cho/deep-loop) | [`e91c504`](https://github.com/Sungmin-Cho/deep-loop/commit/e91c5043379a0e09d4dfcce56c1e63fa4932386b) |
-| deep-model-router | 1.17.2 | [`Sungmin-Cho/deep-model-router`](https://github.com/Sungmin-Cho/deep-model-router) | [`b99b65f`](https://github.com/Sungmin-Cho/deep-model-router/commit/b99b65f5692b545275176323354f79faa785075f) |
+| deep-model-router | 1.18.0 | [`Sungmin-Cho/deep-model-router`](https://github.com/Sungmin-Cho/deep-model-router) | [`4ce4d30`](https://github.com/Sungmin-Cho/deep-model-router/commit/4ce4d3082c746c0dc313de40228034112c383a37) |
 
 > Version reflects `plugin.json.version` at the pinned SHA. Click the SHA to see the upstream commit details.
 
