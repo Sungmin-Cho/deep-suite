@@ -1,0 +1,235 @@
+{
+  "description": "Frozen hook coverage ground truth for marketplace pins on 2026-10-06.",
+  "plugins": {
+    "deep-work": {
+      "sha": "b2e344cf37325a969c623bd8a11554e329fba6b0",
+      "manifest": {},
+      "files": {
+        "hooks/hooks.json": {
+          "hooks": {
+            "PostToolUse": [],
+            "PreToolUse": [],
+            "SessionStart": [],
+            "Stop": []
+          }
+        }
+      },
+      "sidecar_before": {
+        "hooks_active": [
+          "SessionStart",
+          "PreToolUse",
+          "PostToolUse",
+          "Stop"
+        ]
+      },
+      "sidecar_after": {
+        "hooks_active": [
+          "SessionStart",
+          "PreToolUse",
+          "PostToolUse",
+          "Stop"
+        ]
+      }
+    },
+    "deep-wiki": {
+      "sha": "19a378b0c9fcda21638dcbe7c82bed9cb86f0ded",
+      "manifest": {},
+      "files": {
+        "hooks/hooks.json": {
+          "hooks": {
+            "SessionStart": []
+          }
+        }
+      },
+      "sidecar_before": {
+        "hooks_active": [
+          "SessionStart"
+        ]
+      },
+      "sidecar_after": {
+        "hooks_active": [
+          "SessionStart"
+        ]
+      }
+    },
+    "deep-evolve": {
+      "sha": "51ef996dbb31b53865b5f2ee45a6fc3ea8ce15dd",
+      "manifest": {
+        "hooks": "./hooks/hooks.claude.json"
+      },
+      "files": {
+        "hooks/hooks.json": {
+          "hooks": {
+            "PreToolUse": []
+          }
+        },
+        "hooks/hooks.claude.json": {
+          "hooks": {
+            "PreToolUse": []
+          }
+        }
+      },
+      "sidecar_before": {
+        "hooks_active": [
+          "PreToolUse"
+        ]
+      },
+      "sidecar_after": {
+        "hooks_active": [
+          "PreToolUse"
+        ]
+      }
+    },
+    "deep-review": {
+      "sha": "c17a8efe3f8edabcb6f92bd0d1dfabf6dd8a6e58",
+      "manifest": {},
+      "files": {
+        "hooks/hooks.json": {
+          "hooks": {}
+        }
+      },
+      "sidecar_before": {
+        "hooks_active": [],
+        "hooks_intentionally_empty_reason": "Evaluator는 user-invocation 기반 trust-boundary 설계 — event-driven hooks를 두지 않아 자기 결과를 자기 입력으로 삼는 echo chamber를 차단."
+      },
+      "sidecar_after": {
+        "hooks_active": [],
+        "hooks_intentionally_empty_reason": "Evaluator는 user-invocation 기반 trust-boundary 설계 — event-driven hooks를 두지 않아 자기 결과를 자기 입력으로 삼는 echo chamber를 차단."
+      }
+    },
+    "deep-docs": {
+      "sha": "9fb620acc211d4c92e5b5665e4ffed7148653d92",
+      "manifest": {},
+      "files": {},
+      "sidecar_before": {
+        "hooks_active": [],
+        "hooks_intentionally_empty_reason": "Garden은 user 명시 호출(scan/garden/audit)로만 trigger — 자동 hook은 doc rot 방지 직관과 무관하게 noise를 만든다."
+      },
+      "sidecar_after": {
+        "hooks_active": [],
+        "hooks_intentionally_empty_reason": "Garden은 user 명시 호출(scan/garden/audit)로만 trigger — 자동 hook은 doc rot 방지 직관과 무관하게 noise를 만든다."
+      }
+    },
+    "deep-dashboard": {
+      "sha": "70e9f79ca886f6148f0a81f4e9197be801e9a13b",
+      "manifest": {},
+      "files": {},
+      "sidecar_before": {
+        "hooks_active": [],
+        "hooks_intentionally_empty_reason": "Aggregator는 user 명시 호출(/deep-harness-dashboard)에서만 보고서를 생성 — event-driven hook은 cross-plugin 집계 의미와 무관하게 noise를 만든다."
+      },
+      "sidecar_after": {
+        "hooks_active": [],
+        "hooks_intentionally_empty_reason": "Aggregator는 user 명시 호출(/deep-harness-dashboard)에서만 보고서를 생성 — event-driven hook은 cross-plugin 집계 의미와 무관하게 noise를 만든다."
+      }
+    },
+    "deep-memory": {
+      "sha": "7d9a29204cd1369a7bf8bc4dd5713a1963e542f5",
+      "manifest": {
+        "hooks": "./hooks/hooks.claude.json"
+      },
+      "files": {
+        "hooks/hooks.json": {
+          "hooks": {
+            "PostToolUse": [],
+            "PostToolUseFailure": [],
+            "PreCompact": [],
+            "SessionEnd": [],
+            "SessionStart": [],
+            "UserPromptSubmit": []
+          }
+        },
+        "hooks/hooks.claude.json": {
+          "hooks": {
+            "PostToolUse": [],
+            "PostToolUseFailure": [],
+            "PreCompact": [],
+            "SessionEnd": [],
+            "SessionStart": [],
+            "UserPromptSubmit": []
+          }
+        }
+      },
+      "sidecar_before": {
+        "hooks_active": [
+          "SessionStart",
+          "UserPromptSubmit",
+          "PostToolUse",
+          "PostToolUseFailure",
+          "PreCompact",
+          "SessionEnd"
+        ]
+      },
+      "sidecar_after": {
+        "hooks_active": [
+          "SessionStart",
+          "UserPromptSubmit",
+          "PostToolUse",
+          "PostToolUseFailure",
+          "PreCompact",
+          "SessionEnd"
+        ]
+      }
+    },
+    "deep-goal": {
+      "sha": "02ccb6e11e29d292a707c22312ff7d7a7e0f63c4",
+      "manifest": {},
+      "files": {},
+      "sidecar_before": {
+        "hooks_active": [],
+        "hooks_intentionally_empty_reason": "Goal compiler는 user 명시 호출(/deep-goal) 기반 — event-driven hooks는 goal condition 컴파일 워크플로와 무관하게 noise를 만든다."
+      },
+      "sidecar_after": {
+        "hooks_active": [],
+        "hooks_intentionally_empty_reason": "Goal compiler는 user 명시 호출(/deep-goal) 기반 — event-driven hooks는 goal condition 컴파일 워크플로와 무관하게 noise를 만든다."
+      }
+    },
+    "deep-loop": {
+      "sha": "e91c5043379a0e09d4dfcce56c1e63fa4932386b",
+      "manifest": {},
+      "files": {
+        "hooks/hooks.json": {
+          "hooks": {
+            "PostCompact": [],
+            "PreCompact": [],
+            "SessionStart": []
+          }
+        }
+      },
+      "sidecar_before": {
+        "hooks_active": [
+          "PreCompact",
+          "PostCompact",
+          "SessionStart"
+        ]
+      },
+      "sidecar_after": {
+        "hooks_active": [
+          "PreCompact",
+          "PostCompact",
+          "SessionStart"
+        ]
+      }
+    },
+    "deep-model-router": {
+      "sha": "b99b65f5692b545275176323354f79faa785075f",
+      "manifest": {},
+      "files": {
+        "hooks/hooks.json": {
+          "hooks": {
+            "SessionStart": []
+          }
+        }
+      },
+      "sidecar_before": {
+        "hooks_active": [],
+        "hooks_intentionally_empty_reason": "First route runs a lazy capability preflight. No default hook."
+      },
+      "sidecar_after": {
+        "hooks_active": [
+          "SessionStart"
+        ]
+      }
+    }
+  }
+}

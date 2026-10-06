@@ -67,6 +67,9 @@ jobs:
       - name: Sidecar paths exist in pinned plugin source
         run: node scripts/check-pinned-plugin-paths.js
 
+      - name: Sidecar hooks_active matches pinned hooks files
+        run: node scripts/check-hooks-coverage.js
+
       - name: Cross-plugin memory-hierarchy conflicts
         run: node scripts/check-memory-hierarchy.js
 

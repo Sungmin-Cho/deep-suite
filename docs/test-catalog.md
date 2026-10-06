@@ -32,16 +32,16 @@
 **Goal**: marketplace SHA → `plugin.json.version` → suite docs(README/AGENTS/guides) → sidecar(`suite-extensions.json`) → memory hierarchy 5개 layer 일관성.
 
 **Files**:
-- `tests/cli-sync-checkers.test.js` — 8 `check-*` 스크립트 spawnSync 시나리오
+- `tests/cli-sync-checkers.test.js` — 9 `check-*` 스크립트 spawnSync 시나리오
 - `tests/markers.test.js` — auto-generated marker round-trip
 - `tests/generate-reference-sections.test.js` — `generate-reference-sections.js --check/--write/--id` CLI
-- `scripts/check-readme-plugin-table.js` / `check-agents-md-paths.js` / `check-guide-version.js` / `check-semver-sha-sync.js` / `check-pinned-plugin-paths.js` / `check-memory-hierarchy.js` / `check-plugin-count.js` / `check-fixture-provenance.js`
+- `scripts/check-readme-plugin-table.js` / `check-agents-md-paths.js` / `check-guide-version.js` / `check-semver-sha-sync.js` / `check-pinned-plugin-paths.js` / `check-hooks-coverage.js` / `check-memory-hierarchy.js` / `check-plugin-count.js` / `check-fixture-provenance.js`
 
 **Run**:
 ```bash
 npm test                       # all node:test files
 npm run docs:check             # marker drift only
-npm run docs:sync              # 8 check-* in sequence
+npm run docs:sync              # 9 check-* in sequence
 ```
 
 **CI**: `.github/workflows/manifest-doc-sync.yml` (PR + push + daily cron)

@@ -32,7 +32,7 @@ npm install                              # ajv + ajv-formats, devDeps only
 npm test                                 # node:test — unit + spawnSync CLI
 npm run validate                         # sidecar: schema + referential integrity
 npm run docs:write                       # regenerate marker regions
-npm run docs:sync                        # 8 doc-sync checkers
+npm run docs:sync                        # 9 doc-sync checkers
 npm run preflight                        # the gate: validate + docs:check + docs:sync + fixtures + test
 npm run release:bump -- <plugin> <sha40> # pin → docs:write → preflight
 ```
@@ -48,7 +48,7 @@ Node 20+, ESM. A `prepare`-installed pre-push hook runs `preflight` before every
 .agents/plugins/
   marketplace.json          — Codex mirror; same pins behind extra policy fields
 schemas/                    — sidecar + M3 artifact-envelope + payload-registry/<producer>/<kind>/
-scripts/                    — validators, marker generator, 8 check-*.js gates, release-bump
+scripts/                    — validators, marker generator, 9 check-*.js gates, release-bump
 tests/                      — node:test suite covering every script above
 guides/                     — 7-plugin integrated workflow, hook patterns, context management
 examples/                   — installable hook configs + a handoff walkthrough

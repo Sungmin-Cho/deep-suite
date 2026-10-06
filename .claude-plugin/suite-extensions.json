@@ -229,8 +229,7 @@
         "writes": [],
         "reads": []
       },
-      "hooks_active": [],
-      "hooks_intentionally_empty_reason": "First route runs a lazy capability preflight. No default hook.",
+      "hooks_active": ["SessionStart"],
       "x-model-routing": {
         "decision_plane": "deep-model-router",
         "request": "RouteRequestV1",
