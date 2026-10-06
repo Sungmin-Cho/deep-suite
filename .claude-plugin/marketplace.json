@@ -88,11 +88,11 @@
     },
     {
       "name": "deep-loop",
-      "description": "Loop Engineering control plane over the deep-suite — discovers work, routes to sibling deep-* plugins as maker/checker episodes, keeps durable lock-safe loop state, and hands off to fresh sessions autonomously with proof-gated terminal states and proposal-only external actions.",
+      "description": "Loop Engineering control plane over the deep-suite — discovers work, routes to sibling deep-* plugins as maker/checker episodes, keeps durable lock-safe loop state, and hands off to fresh sessions autonomously with proof-gated terminal states and proposal-only external actions. Version 1.26.0 adds a read-only `run status --json` summary and a Claude Code status band (2.1.287 and later) above the prompt.",
       "source": {
         "source": "url",
         "url": "https://github.com/Sungmin-Cho/deep-loop.git",
-        "sha": "e91c5043379a0e09d4dfcce56c1e63fa4932386b"
+        "sha": "ece19a9f0633730d4d1dc11d91d2b27533112bd6"
       },
       "dependencies": [
         {
