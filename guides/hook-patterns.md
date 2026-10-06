@@ -43,9 +43,9 @@ The authoritative source is `.claude-plugin/suite-extensions.json` `plugins.<nam
 | `deep-docs` | `[]` (intentional) | Garden operates on explicit `scan` / `garden` / `audit` invocations; auto-triggered scans create noise without raising doc-rot detection quality. |
 | `deep-dashboard` | `[]` (intentional) | Aggregator is a read-only reporter; the user decides when a snapshot is meaningful. Auto-emit would produce constant-stream snapshots whose metadata noise dilutes signal. |
 
-**Invariant**: a plugin with `hooks_active: []` MUST set `hooks_intentionally_empty_reason` *or* `consumer_only: true` (M5 lint candidate; documented in `schemas/README.md` §`hooks_intentionally_empty_reason` invariant).
+**Invariant**: `hooks_active` MUST equal the hook events the pinned plugin actually ships, and a plugin with `hooks_active: []` MUST set `hooks_intentionally_empty_reason` (`consumer_only: true` does not exempt it). `scripts/check-hooks-coverage.js` enforces both in `npm run docs:sync`; see `schemas/README.md` §`hooks_intentionally_empty_reason` invariant.
 
-> `consumer_only` is reserved in the schema for future read-only consumers and is currently unused in the live sidecar — today all three empty-hooks plugins (`deep-review`, `deep-docs`, `deep-dashboard`) ship `hooks_intentionally_empty_reason`.
+> `consumer_only` is reserved in the schema for future read-only consumers and is currently unused in the live sidecar — today all four empty-hooks plugins (`deep-review`, `deep-docs`, `deep-dashboard`, `deep-goal`) ship `hooks_intentionally_empty_reason`.
 
 ---
 

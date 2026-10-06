@@ -43,9 +43,9 @@ Hook이 정답이 되려면 **세 가지가 모두** 성립해야 한다:
 | `deep-docs` | `[]` (의도적) | Garden은 `scan`/`garden`/`audit` 명시 호출로만 동작. 자동 trigger는 doc-rot 감지 품질을 떨어뜨리는 noise를 만든다. |
 | `deep-dashboard` | `[]` (의도적) | Aggregator는 read-only reporter. 사용자가 의미 있다고 판단할 때만 스냅샷이 가치 있다. 상시 auto-emit은 신호 대비 잡음 비를 떨어뜨린다. |
 
-**불변식**: `hooks_active: []`인 플러그인은 반드시 `hooks_intentionally_empty_reason` 또는 `consumer_only: true`를 가져야 한다 (M5 lint 후보; `schemas/README.md` §`hooks_intentionally_empty_reason` invariant 참조).
+**불변식**: `hooks_active`는 pin된 플러그인이 실제로 제공하는 hook 이벤트와 같아야 하고, `hooks_active: []`인 플러그인은 반드시 `hooks_intentionally_empty_reason`을 가져야 한다(`consumer_only: true`로 면제되지 않는다). `scripts/check-hooks-coverage.js`가 `npm run docs:sync`에서 둘 다 검사한다. `schemas/README.md` §`hooks_intentionally_empty_reason` invariant 참조.
 
-> `consumer_only` 는 schema 차원에서 향후 read-only consumer 용으로 예약돼 있고 현재 sidecar에서는 사용되지 않는다 — 오늘 세 plugin(`deep-review`, `deep-docs`, `deep-dashboard`) 은 모두 `hooks_intentionally_empty_reason`을 사용한다.
+> `consumer_only` 는 schema 차원에서 향후 read-only consumer 용으로 예약돼 있고 현재 sidecar에서는 사용되지 않는다 — 오늘 네 plugin(`deep-review`, `deep-docs`, `deep-dashboard`, `deep-goal`) 은 모두 `hooks_intentionally_empty_reason`을 사용한다.
 
 ---
 

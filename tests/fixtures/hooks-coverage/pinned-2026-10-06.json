@@ -132,9 +132,7 @@
         "hooks/hooks.json": {
           "hooks": {
             "PostToolUse": [],
-            "PostToolUseFailure": [],
             "PreCompact": [],
-            "SessionEnd": [],
             "SessionStart": [],
             "UserPromptSubmit": []
           }

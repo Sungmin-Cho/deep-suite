@@ -53,10 +53,11 @@ The schema cannot express this conditional cross-file constraint: whether `hooks
 
 `scripts/check-hooks-coverage.js` enforces the invariant in `npm run docs:sync`, and therefore in `preflight`, the pre-push hook, and the `manifest-doc-sync` CI workflow. It applies these rules:
 
-- `hooks_active` must equal the event set found in the union of `hooks/hooks.json` and every hooks file or inline config named by `.claude-plugin/plugin.json`.
+- `hooks_active` must equal the event set found in the union of `hooks/hooks.json` and every hooks file or inline config named by the `hooks` field of `.claude-plugin/plugin.json` (required at the pin) and `.codex-plugin/plugin.json` (optional). A hooks file wraps its event map in a top-level `hooks` key; an inline manifest object is the event map itself.
 - An empty `hooks_active` list requires a non-empty `hooks_intentionally_empty_reason`; `consumer_only` does not exempt it.
 - A non-empty `hooks_active` list must not carry `hooks_intentionally_empty_reason`.
-- `modules` declarations are reported as notes only; they are not gated.
+- `modules` declarations are reported as notes only; they are not gated. The note says so when more than one hooks file of a plugin declares `modules`, since Claude Code then loads neither.
+- Only a 404 for a path counts as "file absent"; any other fetch failure (including a missing `gh` CLI) aborts with exit 2.
 
 The current sidecar records a reason for `deep-review`, `deep-docs`, `deep-dashboard`, and `deep-goal`.
 
