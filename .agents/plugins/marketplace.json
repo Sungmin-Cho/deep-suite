@@ -134,11 +134,11 @@
     },
     {
       "name": "deep-model-router",
-      "description": "Deterministic model/effort/review router for Claude Code, Codex, and Grok. Version 1.17.2 records the attended maker-seat probes for GPT-6.1 Sol and Claude Sonnet 5.5 and a preregistered tier check: on a replay of a real review from this repository, Claude Sonnet 5.5 found 21% of the known defects against 31–42% for the tier-2 seats and 8% for its predecessor, so it stays at tier 1 on measured evidence. Every tier and binding stays in place; review stays sized to the band, and worker difficulty and review risk remain separate.",
+      "description": "Deterministic model/effort/review router for Claude Code, Codex, and Grok. Version 1.18.0 adds a Claude Code mod (2.1.287 and later) that shows what the router already knows: dispatched seats on the status line and in /router-seats, a warning when a route seats the session's own model, and model-sync notices in /router-sync. It changes no route, receipt or review floor, and Codex and Grok load nothing new; on every host the route now notes a declared host model that holds a review seat with no author declared.",
       "source": {
         "source": "url",
         "url": "https://github.com/Sungmin-Cho/deep-model-router.git",
-        "sha": "b99b65f5692b545275176323354f79faa785075f"
+        "sha": "4ce4d3082c746c0dc313de40228034112c383a37"
       },
       "policy": {
         "installation": "INSTALLED_BY_DEFAULT",
