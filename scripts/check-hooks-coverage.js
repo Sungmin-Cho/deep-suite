@@ -46,15 +46,19 @@ export function hookSourcesFromManifest(pluginJson) {
   const add = (item) => {
     if (typeof item === 'string') {
       const source = sourceForPath(item);
-      if (!seen.has(source.path)) { sources.push(source); seen.add(source.path); }
+      // An explicitly named default stays one entry but is marked declared:
+      // Claude Code then refuses it if it is missing.
+      if (source.path === DEFAULT_HOOKS_FILE) sources[0].declared = true;
+      else if (!seen.has(source.path)) { sources.push(source); seen.add(source.path); }
     } else if (isPlainObject(item)) {
       sources.push({ kind: 'inline', doc: item });
     } else {
       throw new Error(`invalid hook source ${JSON.stringify(item)} (expected a path string or plain object)`);
     }
   };
-  const hooks = pluginJson?.hooks;
-  if (hooks == null) return sources;
+  if (!isPlainObject(pluginJson)) throw new Error('manifest must be a JSON object');
+  if (!Object.hasOwn(pluginJson, 'hooks')) return sources;
+  const hooks = pluginJson.hooks;
   if (typeof hooks === 'string' || isPlainObject(hooks)) add(hooks);
   else if (Array.isArray(hooks)) hooks.forEach(add);
   else throw new Error(`invalid hooks manifest value ${JSON.stringify(hooks)}`);
@@ -122,8 +126,7 @@ export function checkHooksCoverage({ sidecar, plugins, readFile }) {
   for (const pluginInfo of plugins) {
     const { plugin, sha } = pluginInfo;
     const at = `${plugin} ${sha.slice(0, 7)}`;
-    const sources = [{ kind: 'file', path: DEFAULT_HOOKS_FILE, from: 'default' }];
-    const seen = new Set([DEFAULT_HOOKS_FILE]);
+    const sources = [{ kind: 'file', path: DEFAULT_HOOKS_FILE, from: 'default', required: false }];
     for (const manifest of MANIFESTS) {
       const raw = readFile(pluginInfo, manifest.path);
       if (raw === null) {
@@ -135,12 +138,15 @@ export function checkHooksCoverage({ sidecar, plugins, readFile }) {
       let declared;
       try { declared = hookSourcesFromManifest(json); }
       catch (err) { errors.push(`${at} ${manifest.path} — ${err.message}`); continue; }
-      for (const source of declared) {
+      // `declared[0]` is the implicit default; it is required only when this
+      // manifest names it. Every other entry was named, so its file must exist.
+      if (declared[0].declared && !sources[0].required) Object.assign(sources[0], { required: true, from: manifest.path });
+      for (const source of declared.slice(1)) {
         if (source.kind === 'file') {
-          if (seen.has(source.path)) continue;
-          seen.add(source.path);
+          const known = sources.find((s) => s.kind === 'file' && s.path === source.path);
+          if (known) { known.required = true; continue; }
         }
-        sources.push({ ...source, from: manifest.path });
+        sources.push({ ...source, from: manifest.path, required: true });
       }
     }
     const events = new Set();
@@ -155,7 +161,12 @@ export function checkHooksCoverage({ sidecar, plugins, readFile }) {
         catch (err) { errors.push(`${at} ${label} — ${err.message}`); continue; }
       } else {
         const raw = readFile(pluginInfo, source.path);
-        if (raw === null) continue;
+        if (raw === null) {
+          // Claude Code refuses a declared path that does not exist; only the
+          // undeclared default hooks/hooks.json may be absent.
+          if (source.required) errors.push(`${at} ${source.path} — named by ${source.from} but missing at the pin`);
+          continue;
+        }
         files++;
         const doc = parseJson(raw, (msg) => errors.push(`${at} ${source.path} — ${msg}`));
         if (doc === undefined) continue;

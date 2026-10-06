@@ -67,12 +67,33 @@ test('sidecar-only event is named in drift error', () => {
 test('manifest hooks normalize file paths, inline maps, arrays, and reject unsafe paths', () => {
   assert.deepEqual(hookSourcesFromManifest({}), [{ kind: 'file', path: 'hooks/hooks.json' }]);
   assert.deepEqual(hookSourcesFromManifest({ hooks: './hooks/hooks.claude.json' }), [{ kind: 'file', path: 'hooks/hooks.json' }, { kind: 'file', path: 'hooks/hooks.claude.json' }]);
-  assert.deepEqual(hookSourcesFromManifest({ hooks: './hooks/hooks.json' }), [{ kind: 'file', path: 'hooks/hooks.json' }]);
+  assert.deepEqual(hookSourcesFromManifest({ hooks: './hooks/hooks.json' }), [{ kind: 'file', path: 'hooks/hooks.json', declared: true }]);
   assert.deepEqual(hookSourcesFromManifest({ hooks: ['./x.json', { SessionStart: [] }] }), [{ kind: 'file', path: 'hooks/hooks.json' }, { kind: 'file', path: 'x.json' }, { kind: 'inline', doc: { SessionStart: [] } }]);
   assert.deepEqual(hookSourcesFromManifest({ hooks: { SessionEnd: [] } }).at(-1), { kind: 'inline', doc: { SessionEnd: [] } });
   for (const value of ['../x.json', './a/../../x.json', '/abs.json', '..\\x.json', 'C:/x.json', 7]) {
     assert.throws(() => hookSourcesFromManifest({ hooks: value }), new RegExp(JSON.stringify(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
   }
+});
+
+test('manifests must be objects and an explicit hooks: null is invalid', () => {
+  for (const manifest of [null, [], 7, 'x']) assert.throws(() => hookSourcesFromManifest(manifest), /manifest must be a JSON object/);
+  assert.throws(() => hookSourcesFromManifest({ hooks: null }), /invalid hooks manifest value null/);
+  const result = checkOne({ hooks_active: [], hooks_intentionally_empty_reason: 'r' }, { '.claude-plugin/plugin.json': 'null' });
+  assert.match(result.errors.join('\n'), /\.claude-plugin\/plugin\.json — manifest must be a JSON object/);
+});
+
+test('a hooks file named by a manifest must exist; the undeclared default may be absent', () => {
+  const missingNamed = checkOne({ hooks_active: [], hooks_intentionally_empty_reason: 'r' }, {
+    '.claude-plugin/plugin.json': JSON.stringify({ hooks: './hooks/missing.json' }),
+  });
+  assert.deepEqual(missingNamed.errors, ['sample 1234567 hooks/missing.json — named by .claude-plugin/plugin.json but missing at the pin']);
+  const missingNamedDefault = checkOne({ hooks_active: [], hooks_intentionally_empty_reason: 'r' }, {
+    '.claude-plugin/plugin.json': '{}',
+    '.codex-plugin/plugin.json': JSON.stringify({ hooks: './hooks/hooks.json' }),
+  });
+  assert.deepEqual(missingNamedDefault.errors, ['sample 1234567 hooks/hooks.json — named by .codex-plugin/plugin.json but missing at the pin']);
+  const undeclaredDefault = checkOne({ hooks_active: [], hooks_intentionally_empty_reason: 'r' }, { '.claude-plugin/plugin.json': '{}' });
+  assert.deepEqual(undeclaredDefault.errors, []);
 });
 
 test('hooks files expose wrapped events and modules and reject non-object hooks', () => {

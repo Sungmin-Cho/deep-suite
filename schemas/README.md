@@ -57,6 +57,7 @@ The schema cannot express this conditional cross-file constraint: whether `hooks
 - An empty `hooks_active` list requires a non-empty `hooks_intentionally_empty_reason`; `consumer_only` does not exempt it.
 - A non-empty `hooks_active` list must not carry `hooks_intentionally_empty_reason`.
 - `modules` declarations are reported as notes only; they are not gated. The note says so when more than one hooks file of a plugin declares `modules`, since Claude Code then loads neither.
+- Each manifest must be a JSON object, and every hooks file it names (including an explicitly named `./hooks/hooks.json`) must exist at the pin, as Claude Code refuses a declared path that is missing. Only the undeclared default `hooks/hooks.json` may be absent.
 - Only a 404 for a path counts as "file absent"; any other fetch failure (including a missing `gh` CLI) aborts with exit 2.
 
 The current sidecar records a reason for `deep-review`, `deep-docs`, `deep-dashboard`, and `deep-goal`.
