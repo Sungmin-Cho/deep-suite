@@ -194,13 +194,15 @@ test('CLI treats a missing gh CLI as a fetch failure, not as absent hooks files'
   // 404s are never cached, so deep-docs' absent hooks/hooks.json always needs gh.
   // PATH holds only a node symlink: gh often shares node's bin directory.
   const bin = mkdtempSync(join(tmpdir(), 'hooks-coverage-nogh-'));
+  const cache = mkdtempSync(join(tmpdir(), 'hooks-coverage-cache-'));
   try {
     symlinkSync(process.execPath, join(bin, 'node'));
-    const result = run([], { PATH: bin });
+    const result = run([], { PATH: bin, DEEP_SUITE_CACHE_DIR: cache });
     assert.equal(result.status, 2, result.stderr);
     assert.match(result.stderr, /gh CLI not found/);
   } finally {
     rmSync(bin, { recursive: true, force: true });
+    rmSync(cache, { recursive: true, force: true });
   }
 });
 

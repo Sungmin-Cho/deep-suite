@@ -11,11 +11,12 @@
 //   - Local devs often have `gh auth login` already
 //   - Returns base64-encoded blob with size + sha for sanity checks
 //
-// Test override: when `process.env.M2_TEST_FIXTURES_DIR` is set, the fetcher
-// reads from `${M2_TEST_FIXTURES_DIR}/<plugin>-<sha>/<path>` instead of GitHub.
+// Test overrides: M2_TEST_FIXTURES_DIR reads fixture files instead of GitHub;
+// DEEP_SUITE_CACHE_DIR selects the cache root (read at call time).
 //
 // API:
 //   fetchPluginFile({ plugin, owner, repo, sha, path }) → string
+//   isPathNotFound(err) → true only for a 404 FetchError (code PATH_NOT_FOUND)
 //   pluginInfoFromMarketplace(entry) → { plugin, owner, repo, sha }
 //   readMarketplace(repoRoot) → { plugins: [...{plugin, owner, repo, sha, description}] }
 
@@ -27,16 +28,19 @@ import { fileURLToPath } from 'node:url';
 const __filename = fileURLToPath(import.meta.url);
 const SCRIPTS_LIB_DIR = dirname(__filename);
 const REPO_ROOT = resolve(SCRIPTS_LIB_DIR, '..', '..');
-const CACHE_ROOT = resolve(REPO_ROOT, '.deep-suite-cache');
-
 export class FetchError extends Error {
-  constructor(message, { plugin, sha, path } = {}) {
+  constructor(message, { plugin, sha, path, code } = {}) {
     super(message);
     this.name = 'FetchError';
     this.plugin = plugin;
     this.sha = sha;
     this.path = path;
+    this.code = code;
   }
+}
+
+export function isPathNotFound(err) {
+  return err instanceof FetchError && err.code === 'PATH_NOT_FOUND';
 }
 
 function parseGitHubUrl(url) {
@@ -74,8 +78,14 @@ export function readMarketplace(repoRoot = REPO_ROOT) {
   };
 }
 
+function cacheRoot() {
+  const override = process.env.DEEP_SUITE_CACHE_DIR;
+  // Relative overrides are repo-rooted, like the default, not cwd-relative.
+  return override ? resolve(REPO_ROOT, override) : resolve(REPO_ROOT, '.deep-suite-cache');
+}
+
 function cachePath(plugin, sha, path) {
-  return join(CACHE_ROOT, `${plugin}-${sha}`, path);
+  return join(cacheRoot(), `${plugin}-${sha}`, path);
 }
 
 function readCache(plugin, sha, path) {
@@ -123,7 +133,7 @@ function ghApiContents({ owner, repo, sha, path }) {
     if (/HTTP 404/.test(stderr) || /Not Found/.test(stderr)) {
       throw new FetchError(
         `path not found at ${owner}/${repo}@${sha}: ${path}`,
-        { sha, path }
+        { sha, path, code: 'PATH_NOT_FOUND' }
       );
     }
     if (/HTTP 403/.test(stderr) && /rate limit/i.test(stderr)) {

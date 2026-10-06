@@ -14,7 +14,7 @@ Suite-level tooling. Each script is self-contained and runnable from the repo ro
 | `check-semver-sha-sync.js` | Verify marketplace.entry.sha → plugin.json.version → suite docs marker tables agree (cache-key drift guard) | `0` clean, `1` drift, `2` IO/usage/fetch |
 | `check-pinned-plugin-paths.js` | Verify sidecar artifact paths appear in pinned plugin source (W-R1, W-R2 absorber) | `0` clean, `1` drift, `2` IO/fetch |
 | `check-hooks-coverage.js` | Verify sidecar `hooks_active` equals the hook events in the pinned `hooks/hooks.json` ∪ the Claude/Codex manifest `hooks` files and inline maps; empty list needs `hooks_intentionally_empty_reason`, non-empty list must not carry one; `modules` is reported only | `0` clean, `1` drift, `2` IO/usage/fetch |
-| `check-memory-hierarchy.js` | Detect cross-plugin policy conflicts using a keyword dictionary (suite ↔ each plugin's docs at pinned SHA) | `0` clean, `1` conflict, `2` IO/usage/fetch |
+| `check-memory-hierarchy.js` | Detect cross-plugin policy conflicts using a keyword dictionary (suite ↔ each plugin's docs at pinned SHA); exits 2 if a plugin has no readable probe file | `0` clean, `1` conflict, `2` IO/usage/fetch |
 | `check-plugin-count.js` | Verify plugin-count narrative ("N plugins") against `marketplace.plugins.length`; curated subsets assert their own literal and cross-check the "Reflects …" preamble | `0` clean, `1` drift, `2` IO/usage |
 | `check-fixture-provenance.js` | Verify each real-emit envelope fixture's root `x-provenance.captured_at_sha` still equals its producer's marketplace pin | `0` clean, `1` drift, `2` IO/usage |
 | `validate-artifact.js` | Validate a JSON artifact against `schemas/artifact-envelope.schema.json` + (when registered) `schemas/payload-registry/<producer>/<kind>/v<v>.schema.json`. M3 Phase 1. | `0` valid (envelope passes; payload either passes or registry-miss warning), `1` validation fail (envelope vs payload phase via stderr prefix), `2` IO/usage |
@@ -28,7 +28,7 @@ Suite-level tooling. Each script is self-contained and runnable from the repo ro
 | Module | Purpose |
 |---|---|
 | `lib/markers.js` | `<!-- deep-suite:auto-generated:<id>:start -->` marker parser/replacer used by generator and check-* scripts |
-| `lib/fetch-plugin-files.js` | `gh api` + `.deep-suite-cache/<plugin>-<sha>/` cached fetcher; honours `M2_TEST_FIXTURES_DIR` for test overrides |
+| `lib/fetch-plugin-files.js` | `gh api` + `.deep-suite-cache/<plugin>-<sha>/` cached fetcher; exports `isPathNotFound` (404 is `FetchError.code === 'PATH_NOT_FOUND'`); honours `M2_TEST_FIXTURES_DIR` and `DEEP_SUITE_CACHE_DIR` for test overrides/cache root |
 
 ## Git hooks
 

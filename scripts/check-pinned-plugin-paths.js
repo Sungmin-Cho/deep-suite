@@ -28,7 +28,7 @@
 import { readFileSync, existsSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { readMarketplace, fetchPluginFile, FetchError } from './lib/fetch-plugin-files.js';
+import { readMarketplace, fetchPluginFile, isPathNotFound } from './lib/fetch-plugin-files.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(__dirname, '..');
@@ -157,7 +157,7 @@ function buildHaystack({ pluginInfo }) {
       const text = fetchPluginFile({ ...pluginInfo, path: probe });
       chunks.push({ path: probe, text });
     } catch (err) {
-      if (err instanceof FetchError && /not found/.test(err.message)) {
+      if (isPathNotFound(err)) {
         continue; // missing probe is fine
       }
       throw err;

@@ -34,6 +34,7 @@
 **Files**:
 - `tests/cli-sync-checkers.test.js` — 8 `check-*` 스크립트 spawnSync 시나리오
 - `tests/check-hooks-coverage.test.js` — `check-hooks-coverage.js` 순수 함수(frozen fixture `tests/fixtures/hooks-coverage/`) + CLI
+- `tests/fetch-plugin-files.test.js` — `fetchPluginFile` 오류 분류(404 vs gh 없음/네트워크/rate limit)와 `DEEP_SUITE_CACHE_DIR`
 - `tests/markers.test.js` — auto-generated marker round-trip
 - `tests/generate-reference-sections.test.js` — `generate-reference-sections.js --check/--write/--id` CLI
 - `scripts/check-readme-plugin-table.js` / `check-agents-md-paths.js` / `check-guide-version.js` / `check-semver-sha-sync.js` / `check-pinned-plugin-paths.js` / `check-hooks-coverage.js` / `check-memory-hierarchy.js` / `check-plugin-count.js` / `check-fixture-provenance.js`
