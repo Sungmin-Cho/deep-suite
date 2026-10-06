@@ -17,7 +17,7 @@
 import { readFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
-import { readMarketplace, fetchPluginFile, FetchError } from './lib/fetch-plugin-files.js';
+import { readMarketplace, fetchPluginFile, isPathNotFound } from './lib/fetch-plugin-files.js';
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const DEFAULT_HOOKS_FILE = 'hooks/hooks.json';
@@ -198,7 +198,7 @@ function main() {
       catch (err) {
         // Only a 404 for the path means "no such file". `gh CLI not found`,
         // rate limits and other gh failures are FetchErrors too and abort.
-        if (err instanceof FetchError && /^path not found at /.test(err.message)) return null;
+        if (isPathNotFound(err)) return null;
         err.message = `failed to fetch ${info.plugin} ${path}: ${err.message}`;
         throw err;
       }

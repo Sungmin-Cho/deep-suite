@@ -15,7 +15,7 @@
 // Exit codes: 0 clean, 1 conflict, 2 IO/fetch.
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { readMarketplace, fetchPluginFile, FetchError } from './lib/fetch-plugin-files.js';
+import { readMarketplace, fetchPluginFile, isPathNotFound } from './lib/fetch-plugin-files.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(__dirname, '..');
@@ -136,17 +136,19 @@ function main() {
   let drift = 0;
   let probed = 0;
   for (const info of market.plugins) {
+    let pluginProbed = 0;
     for (const probe of PROBE_FILES) {
       let text;
       try {
         text = fetchPluginFile({ ...info, path: probe });
       } catch (err) {
-        if (err instanceof FetchError && /not found/.test(err.message)) continue;
+        if (isPathNotFound(err)) continue;
         console.error(`error: fetch ${info.plugin}/${probe}: ${err.message}`);
         process.exitCode = 2;
         return;
       }
       probed++;
+      pluginProbed++;
       const offenses = checkFile({ plugin: info.plugin, path: probe, text });
       for (const o of offenses) {
         const cacheRel = `.deep-suite-cache/${o.plugin}-${info.sha.slice(0, 7)}.../${o.file}:${o.line}`;
@@ -155,6 +157,11 @@ function main() {
         console.error(`    snippet: ${o.snippet}`);
         drift++;
       }
+    }
+    if (pluginProbed === 0) {
+      console.error(`error: no probe file (${PROBE_FILES.join(', ')}) readable for ${info.plugin}@${info.sha.slice(0, 7)} — check repository access or the pin`);
+      process.exitCode = 2;
+      return;
     }
   }
 
