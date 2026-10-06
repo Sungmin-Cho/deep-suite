@@ -80,7 +80,8 @@ export function readMarketplace(repoRoot = REPO_ROOT) {
 
 function cacheRoot() {
   const override = process.env.DEEP_SUITE_CACHE_DIR;
-  return override ? resolve(override) : resolve(REPO_ROOT, '.deep-suite-cache');
+  // Relative overrides are repo-rooted, like the default, not cwd-relative.
+  return override ? resolve(REPO_ROOT, override) : resolve(REPO_ROOT, '.deep-suite-cache');
 }
 
 function cachePath(plugin, sha, path) {

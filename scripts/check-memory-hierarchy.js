@@ -10,7 +10,10 @@
 //   - CHANGELOG.md
 //   - AGENTS.md (optional)
 //   - CLAUDE.md (optional)
-//   - .claude-plugin/plugin.json
+//
+// Only a 404 (isPathNotFound) means a probe is absent; any other fetch error
+// exits 2. A plugin with no readable probe at all also exits 2 — a repo-level
+// 404 or an access problem must not pass as "no conflicts".
 //
 // Exit codes: 0 clean, 1 conflict, 2 IO/fetch.
 import { dirname, resolve } from 'node:path';

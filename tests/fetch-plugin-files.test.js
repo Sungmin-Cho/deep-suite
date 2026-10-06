@@ -2,6 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { mkdtempSync, mkdirSync, rmSync, writeFileSync, existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { tmpdir } from 'node:os';
 import { FetchError, fetchPluginFile, isPathNotFound } from '../scripts/lib/fetch-plugin-files.js';
 
@@ -26,8 +27,9 @@ function withFakeGh(t, stdout, stderr, status) {
 }
 
 test('404 is classified with PATH_NOT_FOUND', (t) => {
-  withFakeGh(t, '', 'gh: Not Found (HTTP 404)\n', 1);
+  const { cache } = withFakeGh(t, '', 'gh: Not Found (HTTP 404)\n', 1);
   assert.throws(() => fetchPluginFile(info), (err) => isPathNotFound(err) && err.code === 'PATH_NOT_FOUND');
+  assert.equal(existsSync(join(cache, `zz-fetch-test-${info.sha}`)), false, 'a 404 must not be cached');
 });
 
 test('missing gh is not a path 404', (t) => {
@@ -66,5 +68,5 @@ test('successful fetch uses the overridden cache root', (t) => {
   assert.equal(fetchPluginFile(info), 'hello');
   const cached = join(cache, `zz-fetch-test-${info.sha}`, 'README.md');
   assert.equal(readFileSync(cached, 'utf8'), 'hello');
-  assert.equal(existsSync(join(new URL('..', import.meta.url).pathname, '.deep-suite-cache', `zz-fetch-test-${info.sha}`)), false);
+  assert.equal(existsSync(join(fileURLToPath(new URL('..', import.meta.url)), '.deep-suite-cache', `zz-fetch-test-${info.sha}`)), false);
 });

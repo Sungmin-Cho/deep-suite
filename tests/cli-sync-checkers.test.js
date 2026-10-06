@@ -169,6 +169,21 @@ test('check-memory-hierarchy.js exits 2 when every probe of a plugin is a 404', 
   } finally { rmSync(root, { recursive: true, force: true }); }
 });
 
+test('check-memory-hierarchy.js counts readable probes per plugin, not per run', () => {
+  // deep-work (first in the marketplace) has one readable probe via the fixture
+  // override; deep-wiki (second) has none, so the run must stop at deep-wiki.
+  const { root, bin, cache } = makeIsolatedBinAndCache();
+  try {
+    writeFileSync(resolve(bin, 'gh'), '#!/bin/sh\necho "gh: Not Found (HTTP 404)" >&2\nexit 1\n', { mode: 0o755 });
+    const fixtures = resolve(root, 'fixtures');
+    mkdirSync(resolve(fixtures, 'deep-work'), { recursive: true });
+    writeFileSync(resolve(fixtures, 'deep-work', 'README.md'), '# deep-work\n');
+    const res = run('check-memory-hierarchy.js', [], { PATH: bin, DEEP_SUITE_CACHE_DIR: cache, M2_TEST_FIXTURES_DIR: fixtures });
+    assert.equal(res.status, 2, res.stderr);
+    assert.match(res.stderr, /no probe file .* readable for deep-wiki@/);
+  } finally { rmSync(root, { recursive: true, force: true }); }
+});
+
 // --- check-memory-hierarchy.js ---
 
 test('check-memory-hierarchy.js exits 0 against committed plugin docs', () => {
