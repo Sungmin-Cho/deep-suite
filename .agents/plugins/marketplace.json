@@ -134,11 +134,11 @@
     },
     {
       "name": "deep-model-router",
-      "description": "Deterministic model/effort/review router for Claude Code, Codex, and Grok. Version 1.18.0 adds a Claude Code mod (2.1.287 and later) that shows what the router already knows: dispatched seats on the status line and in /router-seats, a warning when a route seats the session's own model, and model-sync notices in /router-sync. It changes no route, receipt or review floor, and Codex and Grok load nothing new; on every host the route now notes a declared host model that holds a review seat with no author declared.",
+      "description": "Deterministic model/effort/review router for Claude Code, Codex, and Grok. Version 1.19.0 adds Meta's Muse Spark 1.3 as a read-only reviewer seat on Claude Code hosts: bound to no role, it reviews and reads where the xAI seat is unavailable for a route and never takes work that writes, with a provisional tier. The supervisor grades its muse exec stream with a new muse-exec-jsonl-v1 envelope, and a JSON envelope holding an over-long integer no longer crashes the supervisor.",
       "source": {
         "source": "url",
         "url": "https://github.com/Sungmin-Cho/deep-model-router.git",
-        "sha": "4ce4d3082c746c0dc313de40228034112c383a37"
+        "sha": "44edc3823605b9bc4c271f42f757ef7b57c458de"
       },
       "policy": {
         "installation": "INSTALLED_BY_DEFAULT",
