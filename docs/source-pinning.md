@@ -8,7 +8,7 @@ Each plugin is fetched from the SHA below at install time. M2 CI re-checks daily
 
 | Plugin | Pinned Version | Repo | Pinned SHA |
 |---|---|---|---|
-| deep-work | 7.4.1 | [`Sungmin-Cho/deep-work`](https://github.com/Sungmin-Cho/deep-work) | [`b2e344c`](https://github.com/Sungmin-Cho/deep-work/commit/b2e344cf37325a969c623bd8a11554e329fba6b0) |
+| deep-work | 7.4.2 | [`Sungmin-Cho/deep-work`](https://github.com/Sungmin-Cho/deep-work) | [`4826c5f`](https://github.com/Sungmin-Cho/deep-work/commit/4826c5fa22a7546ce40c56e060cfcd467310d6a2) |
 | deep-wiki | 1.12.0 | [`Sungmin-Cho/deep-wiki`](https://github.com/Sungmin-Cho/deep-wiki) | [`19a378b`](https://github.com/Sungmin-Cho/deep-wiki/commit/19a378b0c9fcda21638dcbe7c82bed9cb86f0ded) |
 | deep-evolve | 3.6.3 | [`Sungmin-Cho/deep-evolve`](https://github.com/Sungmin-Cho/deep-evolve) | [`51ef996`](https://github.com/Sungmin-Cho/deep-evolve/commit/51ef996dbb31b53865b5f2ee45a6fc3ea8ce15dd) |
 | deep-review | 2.11.0 | [`Sungmin-Cho/deep-review`](https://github.com/Sungmin-Cho/deep-review) | [`c17a8ef`](https://github.com/Sungmin-Cho/deep-review/commit/c17a8efe3f8edabcb6f92bd0d1dfabf6dd8a6e58) |
