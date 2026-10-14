@@ -134,11 +134,11 @@
     },
     {
       "name": "deep-model-router",
-      "description": "Deterministic model/effort/review router for Claude Code, Codex, and Grok. Version 1.20.0 adds Google's Gemini 3.8 Flash, run through the Antigravity CLI, as a read-only reviewer seat on Claude Code hosts: bound to no role, it reviews and reads only where neither the xAI nor the Muse seat is available for a route, never takes work that writes, and has a provisional tier. A new agy-reviewer-v1 supervisor profile contains it with a read-only agent, deny rules and a refusal of workspaces that carry Antigravity customizations, and grades its output with a new agy-print-json-v1 envelope.",
+      "description": "Deterministic model/effort/review router for Claude Code, Codex, and Grok. Version 1.21.0 moves the fast Claude worker to Claude Haiku 5.5, measures the Muse Spark and Gemini Flash reviewer seats on real reviews (tier 1 confirmed, well below Claude Sonnet 5.5, so Claude Code's balanced fallback puts the Claude model first again), adds a contained Gemini maker profile (agy-maker-v1) whose receipt guard carries a kernel write fence but which has no write authority yet, offers the Gemini reviewer on Codex hosts after the Claude model, and lets model-sync discover newer Gemini Flash and Muse Spark ids.",
       "source": {
         "source": "url",
         "url": "https://github.com/Sungmin-Cho/deep-model-router.git",
-        "sha": "257e98942c6c6fce680fa2cfcf7571088e7877f7"
+        "sha": "c71c18fa0138f48e8f9dfb7de04434e7eb5489a8"
       },
       "policy": {
         "installation": "INSTALLED_BY_DEFAULT",
