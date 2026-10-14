@@ -134,11 +134,11 @@
     },
     {
       "name": "deep-model-router",
-      "description": "Deterministic model/effort/review router for Claude Code, Codex, and Grok. Version 1.19.0 adds Meta's Muse Spark 1.3 as a read-only reviewer seat on Claude Code hosts: bound to no role, it reviews and reads where the xAI seat is unavailable for a route and never takes work that writes, with a provisional tier. The supervisor grades its muse exec stream with a new muse-exec-jsonl-v1 envelope, and a JSON envelope holding an over-long integer no longer crashes the supervisor.",
+      "description": "Deterministic model/effort/review router for Claude Code, Codex, and Grok. Version 1.20.0 adds Google's Gemini 3.8 Flash, run through the Antigravity CLI, as a read-only reviewer seat on Claude Code hosts: bound to no role, it reviews and reads only where neither the xAI nor the Muse seat is available for a route, never takes work that writes, and has a provisional tier. A new agy-reviewer-v1 supervisor profile contains it with a read-only agent, deny rules and a refusal of workspaces that carry Antigravity customizations, and grades its output with a new agy-print-json-v1 envelope.",
       "source": {
         "source": "url",
         "url": "https://github.com/Sungmin-Cho/deep-model-router.git",
-        "sha": "44edc3823605b9bc4c271f42f757ef7b57c458de"
+        "sha": "257e98942c6c6fce680fa2cfcf7571088e7877f7"
       },
       "policy": {
         "installation": "INSTALLED_BY_DEFAULT",
