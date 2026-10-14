@@ -10,7 +10,7 @@ The repositories were renamed from `claude-deep-*` to runtime-neutral `deep-*` o
 
 | Plugin | Version | Description |
 |---|---|---|
-| deep-work | 7.4.1 | Evidence-Driven Development Protocol |
+| deep-work | 7.4.2 | Evidence-Driven Development Protocol |
 | deep-wiki | 1.12.0 | Blocked terminal-prune diagnostics with a preserve-first quarantine plan and journaled wiki mutation |
 | deep-evolve | 3.6.3 | Autonomous Experimentation Protocol |
 | deep-review | 2.11.0 | Independent Evaluator for AI coding agents |

@@ -13,7 +13,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/Sungmin-Cho/deep-work.git",
-        "sha": "b2e344cf37325a969c623bd8a11554e329fba6b0"
+        "sha": "4826c5fa22a7546ce40c56e060cfcd467310d6a2"
       },
       "dependencies": [
         {
