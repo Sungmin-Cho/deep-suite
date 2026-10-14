@@ -50,11 +50,11 @@
     },
     {
       "name": "deep-review",
-      "description": "Independent Evaluator for AI coding agents. v2.11.1 moves the Grok reviewer pin to grok-4.7 (grok-4.6 is no longer served); main stays binary-free.",
+      "description": "Independent Evaluator for AI coding agents. v2.11.2 retires Grok CLI 1.0.4, admits 1.0.13/1.0.52, and checks pinned CLI version/help through native helpers; grok-4.7 stays pinned and main stays binary-free.",
       "source": {
         "source": "url",
         "url": "https://github.com/Sungmin-Cho/deep-review.git",
-        "sha": "0d9e8748dd8e05c815b55034762cbb7c27232572"
+        "sha": "5f0f70fa358f3a0c1ea745662955d955aad6a8d3"
       },
       "policy": {
         "installation": "AVAILABLE",
