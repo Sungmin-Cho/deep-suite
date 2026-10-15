@@ -103,11 +103,11 @@
     },
     {
       "name": "deep-model-router",
-      "description": "Deterministic model/effort/review router for Claude Code, Codex, and Grok. Version 1.22.0 measures tiers against the live models the router seats (never a retired generation), lowers the Muse Spark and Gemini Flash reviewer seats to tier 0 while keeping their fallback places, floors the unknown-root-cause investigation promotion at the balanced role's tier on a first attempt (yielding with a note when that would end the route), and keeps Claude Haiku 5.5 at tier 0 and Sonnet 5.5 at tier 1 until an implementation replay agrees.",
+      "description": "Deterministic model/effort/review router for Claude Code, Codex, and Grok. Version 1.23.0 raises Claude Sonnet 5.5 to tier 2 after an implementation replay agreed with the review replay (Haiku 5.5 stays at tier 0), keeps a stronger table worker through the unknown-root-cause investigation promotion, states that the execution band never deepens the review, and breaks same-tier host /model ties by role.",
       "source": {
         "source": "url",
         "url": "https://github.com/Sungmin-Cho/deep-model-router.git",
-        "sha": "49ac23542ea0d237211356281305f6c803188c34"
+        "sha": "b057eef40755db4ef1982477ae063f1dd599401f"
       }
     }
   ]
