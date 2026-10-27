@@ -134,11 +134,11 @@
     },
     {
       "name": "deep-model-router",
-      "description": "Deterministic model/effort/review router for Claude Code, Codex, and Grok. Version 1.24.0 replaces Gemini 3.8 Flash with Gemini 4 Argon as the read-only gemini reviewer seat — tier 1, measured by a real-review replay — keeps Flash only as history input, and documents the seat's small per-model account quota.",
+      "description": "Deterministic model/effort/review router for Claude Code, Codex, and Grok. Version 1.24.1 moves the OpenAI balanced model from GPT-5.6 Terra to GPT-6.1 Terra — measured by a review replay and an implementation replay, it stays at tier 1 — with routing otherwise unchanged and GPT-5.6 Terra kept as history input.",
       "source": {
         "source": "url",
         "url": "https://github.com/Sungmin-Cho/deep-model-router.git",
-        "sha": "057807c8b4aafcbeafc74da268f5a7d239932dcb"
+        "sha": "2d1aed264bad93fd53e1e73493d2293641e17068"
       },
       "policy": {
         "installation": "INSTALLED_BY_DEFAULT",
