@@ -134,11 +134,11 @@
     },
     {
       "name": "deep-model-router",
-      "description": "Deterministic model/effort/review router for Claude Code, Codex, and Grok. Version 1.23.0 raises Claude Sonnet 5.5 to tier 2 after an implementation replay agreed with the review replay (Haiku 5.5 stays at tier 0), keeps a stronger table worker through the unknown-root-cause investigation promotion, states that the execution band never deepens the review, and breaks same-tier host /model ties by role.",
+      "description": "Deterministic model/effort/review router for Claude Code, Codex, and Grok. Version 1.24.0 replaces Gemini 3.8 Flash with Gemini 4 Argon as the read-only gemini reviewer seat — tier 1, measured by a real-review replay — keeps Flash only as history input, and documents the seat's small per-model account quota.",
       "source": {
         "source": "url",
         "url": "https://github.com/Sungmin-Cho/deep-model-router.git",
-        "sha": "e2e6b5c815dedc90a3320bc7aa3abd84fc780fe5"
+        "sha": "057807c8b4aafcbeafc74da268f5a7d239932dcb"
       },
       "policy": {
         "installation": "INSTALLED_BY_DEFAULT",
