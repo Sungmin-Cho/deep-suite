@@ -134,11 +134,11 @@
     },
     {
       "name": "deep-model-router",
-      "description": "Deterministic model/effort/review router for Claude Code, Codex, and Grok. Version 1.24.1 moves the OpenAI balanced model from GPT-5.6 Terra to GPT-6.1 Terra — measured by a review replay and an implementation replay, it stays at tier 1 — with routing otherwise unchanged and GPT-5.6 Terra kept as history input.",
+      "description": "Deterministic model/effort/review router for Claude Code, Codex, and Grok. Version 1.25.0 records the gemini seat's account quota refusal in the receipt (quota_refusal with the reset delay) and holds a gemini model probe the quota refused until that reset; the seat's containment was re-verified on Antigravity CLI 1.4.12.",
       "source": {
         "source": "url",
         "url": "https://github.com/Sungmin-Cho/deep-model-router.git",
-        "sha": "2d1aed264bad93fd53e1e73493d2293641e17068"
+        "sha": "4b35ee6be914211d347b28609f9be03f9794760b"
       },
       "policy": {
         "installation": "INSTALLED_BY_DEFAULT",
