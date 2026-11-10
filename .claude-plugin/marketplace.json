@@ -103,11 +103,11 @@
     },
     {
       "name": "deep-model-router",
-      "description": "Deterministic model/effort/review router for Claude Code, Codex, and Grok. Version 1.25.1 moves the Claude architect model to Claude Fable 5.2 (documented price $8 / $40 per MTok input / output); both replays were scored on it, its tier 3 stays a policy assignment, and no other route changes.",
+      "description": "Deterministic model/effort/review router for Claude Code, Codex, and Grok. Version 1.25.2 re-verifies the gemini seat's reviewer and maker containment on Antigravity CLI 1.5.4 and documents that the CLI updates itself; no route changes.",
       "source": {
         "source": "url",
         "url": "https://github.com/Sungmin-Cho/deep-model-router.git",
-        "sha": "02b613b6803c5796e99d44ed25f99d2ec8d777cf"
+        "sha": "d6b36d04d84928994791554a3a2d5a43a8975382"
       }
     }
   ]
