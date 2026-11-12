@@ -103,11 +103,11 @@
     },
     {
       "name": "deep-model-router",
-      "description": "Deterministic model/effort/review router for Claude Code, Codex, and Grok. Version 1.25.2 re-verifies the gemini seat's reviewer and maker containment on Antigravity CLI 1.5.4 and documents that the CLI updates itself; no route changes.",
+      "description": "Deterministic model/effort/review router for Claude Code, Codex, and Grok. Version 1.25.3 re-verifies the gemini seat's reviewer and maker containment on Antigravity CLI 1.5.6; no route changes.",
       "source": {
         "source": "url",
         "url": "https://github.com/Sungmin-Cho/deep-model-router.git",
-        "sha": "d6b36d04d84928994791554a3a2d5a43a8975382"
+        "sha": "4e549fb651871ffcaa358b75c3839c068db03907"
       }
     }
   ]
