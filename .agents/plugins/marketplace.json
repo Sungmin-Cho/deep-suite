@@ -134,11 +134,11 @@
     },
     {
       "name": "deep-model-router",
-      "description": "Deterministic model/effort/review router for Claude Code, Codex, and Grok. Version 1.26.0 seats Gemini 4 Hydrogen in place of Gemini 4 Argon as the read-only gemini reviewer (tier 1; its implementation replay read tier 2, so the seat stays read-only).",
+      "description": "Deterministic model/effort/review router for Claude Code, Codex, and Grok. Version 1.26.1 moves the OpenAI reasoning and frontier seats to GPT-6.2 Sol and GPT-6.2 Astra, both scored on the review and implementation replays (tiers 2 and 3 unchanged; no route changes except by the model ids).",
       "source": {
         "source": "url",
         "url": "https://github.com/Sungmin-Cho/deep-model-router.git",
-        "sha": "d2f3c16432ad56c030500ec1895eebdfc2728498"
+        "sha": "88f12ff7e5bc2389668985c206c59557651fa93c"
       },
       "policy": {
         "installation": "INSTALLED_BY_DEFAULT",
